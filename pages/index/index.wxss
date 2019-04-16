@@ -97,16 +97,17 @@
 }
 
 /*待修改*/
-.userDetail span ::after{
+.userDetail span::after{
   display: inline-block;
   width: 10rpx;
-  height: 50rpx;
+  height: 60rpx;
   content: '';
   border: #aaa 1rpx transparent;
-  border-left: #aaa 1rpx solid;
+  border:none;
+  border-right: #aaa 1rpx solid;
   position: absolute;
   top: 2rpx;
-  left: 10rpx;
+  left: 170rpx;
 }
 
 .userDetail input{
