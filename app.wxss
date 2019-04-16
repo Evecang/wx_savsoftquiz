@@ -1,4 +1,8 @@
 /**app.wxss**/
+/** page 的 height:100% 用于使得 .container 的高度占满整个屏幕  **/
+page{
+  height:100%
+}
 .container {
   height: 100%;
   display: flex;

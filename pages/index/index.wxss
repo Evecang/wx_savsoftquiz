@@ -1,6 +1,9 @@
 /**index.wxss**/
 .container{
   height: 100%;
+  width:100%;
+  opacity:0.7;
+  filter:alpha(opacity=70); /* 针对 IE8 以及更早的版本 */
   display: flex;
   flex-direction: column;
   align-items:center;
@@ -115,6 +118,7 @@
   border-left: none;
   border-top-right-radius: 15rpx;
   border-bottom-right-radius: 15rpx;
+  box-shadow: 5rpx 5rpx 6rpx rgb(248, 242, 242);
   padding: 0 10rpx;
 }
 
@@ -123,4 +127,5 @@
   height: 80rpx;
   line-height: 80rpx;
   margin:10rpx 0;
+  background:-webkit-linear-gradient(60deg,rgb(16, 141, 64) 25%,rgb(34, 252, 14));
 }

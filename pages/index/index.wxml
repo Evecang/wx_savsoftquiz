@@ -1,5 +1,5 @@
 <!--index.wxml-->
-<view class="container">
+<view class="container" style="background:url({{bgImgAbosoluteUrl}}) no-repeat fixed center;background-size:contain;">
   <view class="userinfo">
     <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo"             bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
     <block wx:else>
