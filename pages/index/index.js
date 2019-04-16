@@ -119,6 +119,7 @@ Page({
       },
       header: header,
       success: res =>{
+        console.log(res)
         if(res.data[0]){
           that.setData({
             loading:false

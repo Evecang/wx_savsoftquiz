@@ -1,1 +1,86 @@
 /* pages/quiz/quiz_list.wxss */
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0;
+  box-sizing: border-box;
+} 
+
+.row{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin: 20rpx 0;
+}
+
+.searchInput{
+  float: left;
+  min-width: 450rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  border: #aaa 1rpx solid;
+  border-top-left-radius: 10rpx;
+  border-bottom-left-radius: 10rpx;
+  padding-left: 20rpx;
+}
+
+button::after {
+  border: none;
+}
+.searchBtn{
+  float:left;
+  width: 150rpx;
+  height: 63rpx;
+  line-height: 63rpx;
+  font-size: 30rpx;
+  border-radius: 0;
+  border: #aaa 1rpx solid;
+  border-left: none;
+  border-top-right-radius: 10rpx;
+  border-bottom-right-radius: 10rpx;
+}
+
+
+.grid{
+  width: 310rpx;
+  margin: 0 20rpx;
+  /* float: left; */
+}
+
+.gridBox{
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 300rpx;
+  height: 300rpx;
+  margin-bottom: 20rpx;
+  background-color: #FFF;
+  border: #E0E0E0 1rpx solid;
+  border-radius: 10rpx;
+  font-size: 30rpx;
+}
+
+.gridHeader{
+  width: 100%;
+  height: 35%;
+  border: none;
+}
+
+.gridBody{
+  width: 100%;
+  height: 45%;
+  border-top: #e0e0e0 1rpx solid;
+  border-bottom: #e0e0e0 1rpx solid;
+}
+
+.gridFooter{
+  width: 100%;
+  height: 20%;
+
+}

@@ -96,6 +96,7 @@
  position: relative;
 }
 
+/*待修改*/
 .userDetail span ::after{
   display: inline-block;
   width: 10rpx;
@@ -128,4 +129,8 @@
   line-height: 80rpx;
   margin:10rpx 0;
   background:-webkit-linear-gradient(60deg,rgb(16, 141, 64) 25%,rgb(34, 252, 14));
+}
+
+.editBtn::after{
+  border:none;
 }
