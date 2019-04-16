@@ -64,13 +64,13 @@ Page({
                   duration:1000,
                   success(d){
                     //TODO:存储用户信息,目前在后台$this->session中存储了
-                    app.globalData.userData = res.data['user']
+                    app.globalData.userData = res.data
                     that.setData({
-                      userData : res.data['user'],
+                      userData : res.data,
                       editUser: {
-                        first_name: res.data['user'].first_name,
-                        last_name: res.data['user'].last_name,
-                        contact_no: res.data['user'].contact_no
+                        first_name: res.data.first_name,
+                        last_name: res.data.last_name,
+                        contact_no: res.data.contact_no
                       }
                     })
                   }
