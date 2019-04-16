@@ -1,0 +1,63 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="userinfo">
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo"             bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <block wx:else>
+      <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block>
+  </view>
+  <!--同步服务端的登录接口-->
+  <block wx:if="{{showLogin}}">
+    <form bindsubmit="formSubmit" bindreset="formReset">
+      <view class='login_web' >
+        <text>首次登录</text>
+        <input name='email' bindinput='emailInput' type='text' placeholder=' account' class='input' required auto-focus value='admin@example.com'/>
+        <input name='password' bindinput='passwordInput' type='password' placeholder=' password' class='input' required value='admin'/>
+        <span class='btn-area'>
+          <button form-type='submit' size='mini' type='primary' loading='{{loading}}'  >login</button>
+          <button form-type='reset' size='mini' type='default'>reset</button>
+        </span>
+        </view>
+    </form>
+  </block>
+  <block wx:else>
+    <form bindsubmit='editUser'>
+      <view  class='userDetail'>
+        <p class='editTitle'>Edit User</p>
+        <label>
+          <span>Group</span>
+          <input name='group_name' value="{{userData.group_name}}" disabled/>
+        </label>
+
+        <label>
+          <span>Account</span>
+          <input name='email' value="{{userData.email}}" disabled="{{true}}"/>
+        </label>
+
+        <label>
+          <span>Password</span>
+          <input name='password' value="{{editUser.password}}" type='password' focus='{{true}}' placeholder='空则代表不修改密码..'/>
+        </label>
+
+        <label>
+          <span>First Name</span>
+          <input name='first_name' value="{{editUser.first_name}}"/>
+        </label>
+
+        <label>
+          <span>Last Name</span>
+          <input name='last_name' value="{{editUser.last_name}}"/>
+        </label>
+
+        <label>
+          <span>Tel</span>
+          <input name='contact_no' value="{{editUser.contact_no}}"/>
+        </label>
+
+        <button type='primary' form-type='submit' class='editBtn' loading='{{loading}}'>Submit</button>
+      </view>
+    </form>
+  </block>
+
+</view>

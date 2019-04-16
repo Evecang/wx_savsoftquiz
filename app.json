@@ -1,0 +1,41 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/quiz/quiz_list",
+    "pages/result/result_list"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "savsoftquiz",
+    "navigationBarTextStyle": "black"
+  },
+  "networkTimeout": {
+    "request": 10000
+  },
+  "debug": true,
+  "tabBar": {
+    "color": "#8a8a8a",
+    "selectedColor": "#05b9d0",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "个人信息",
+        "iconPath": "images/userinfo.png",
+        "selectedIconPath": "images/userinfo_selected.png"
+      },
+      {
+        "pagePath": "pages/quiz/quiz_list",
+        "text": "考试",
+        "iconPath": "images/exam.png",
+        "selectedIconPath": "images/exam_selected.png"
+      },
+      {
+        "pagePath": "pages/result/result_list",
+        "text": "结果",
+        "iconPath": "images/result.png",
+        "selectedIconPath": "images/result_selected.png"
+      }
+    ]
+  }
+}

@@ -1,0 +1,126 @@
+/**index.wxss**/
+.container{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+  justify-content:center;
+  padding:10rpx 0;
+}
+
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content:space-around;
+}
+
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  color: #aaa;
+}
+
+.login_web{
+  display: flex;
+  flex-direction:column;
+  align-items: center;
+  justify-content: space-around;
+  width:550rpx;
+  /* height: 300rpx; */
+  margin:35rpx 0 30rpx 0;
+  padding:40rpx;
+  border-radius:5%;
+  background-color:#e4effb;
+}
+
+.input{
+  background-color:#fff;
+  width:500rpx;
+  height:80rpx;
+  margin:30rpx 0;
+  padding-left: 20rpx;
+}
+
+.btn-area{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.btn-area button{
+  margin:0 40rpx;
+}
+
+.editTitle{
+  /* margin: 10rpx 0; */
+}
+
+.userDetail{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 650rpx;
+  /* height: 700rpx; */
+  margin-top: 50rpx;
+  padding:20rpx 0;
+  border: 1rpx solid #aaa;
+  border-radius:20rpx;
+}
+
+.userDetail label{
+ margin:10rpx 0;
+ height: 80rpx;
+}
+
+.userDetail span{
+ width:170rpx;
+ text-align: center;
+ float:left;
+ height:60rpx;
+ line-height:60rpx;
+ font-size: 30rpx;
+ border: #aaa 1rpx solid;
+ border-right: none;
+ border-top-left-radius: 15rpx;
+ border-bottom-left-radius: 15rpx;
+ padding: 0 10rpx;
+ position: relative;
+}
+
+.userDetail span ::after{
+  display: inline-block;
+  width: 10rpx;
+  height: 50rpx;
+  content: '';
+  border: #aaa 1rpx transparent;
+  border-left: #aaa 1rpx solid;
+  position: absolute;
+  top: 2rpx;
+  left: 10rpx;
+}
+
+.userDetail input{
+  min-width: 380rpx;
+  float:left;
+  height:60rpx;
+  line-height:60rpx;
+  font-size: 30rpx;
+  border:#aaa 1rpx solid;
+  border-left: none;
+  border-top-right-radius: 15rpx;
+  border-bottom-right-radius: 15rpx;
+  padding: 0 10rpx;
+}
+
+.editBtn{
+  width: 450rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  margin:10rpx 0;
+}
