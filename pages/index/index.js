@@ -11,13 +11,7 @@ Page({
     loading:false,
     showLogin:false,
     userData: null, 
-    bgImgAbosoluteUrl:  '',
-    editUser:{
-      password:'',
-      first_name:'',
-      last_name:'',
-      contact_no:''
-    }
+    bgImgAbosoluteUrl:  ''
   },
   //事件处理函数
   formSubmit(e){
@@ -67,12 +61,7 @@ Page({
                     //TODO:存储用户信息,目前在后台$this->session中存储了
                     app.globalData.userData = res.data
                     that.setData({
-                      userData : res.data,
-                      editUser: {
-                        first_name: res.data.first_name,
-                        last_name: res.data.last_name,
-                        contact_no: res.data.contact_no
-                      }
+                      userData : res.data
                     })
                   }
                 })
@@ -198,18 +187,14 @@ Page({
               if (res1 && res1.header && res1.header['Set-Cookie']) {
                 wx.setStorageSync('cookieKey', res1.header['Set-Cookie']);   //保存Cookie到Storage
               }
-              console.log(res1.header['Set-Cookie'])
+              // console.log(res1.header['Set-Cookie'])
               //已经绑定
               that.setData({ 
                 showLogin: false, 
-                userData: res1.data['user'],
-                editUser:{
-                  first_name:res1.data['user'].first_name,
-                  last_name:res1.data['user'].last_name,
-                  contact_no:res1.data['user'].contact_no
-                }
+                userData: res1.data['user']
               })
               app.globalData.userData = res1.data['user']
+              console.log(app.globalData.userData)
             }
           }
         })

@@ -10,8 +10,9 @@ Page({
   data: {
     search:'long answer test',
     result:[],
-    colorCode:['#dff0d8', '#fcf8e3', 'd9edf7','#f2dede'],
-
+    bgColor: ['#dff0d8', '#fcf8e3', '#d9edf7','#f2dcf2'],
+    fontColor: ['#3c763d', '#8a6d3b', '#31708f','#a94442'],
+    userData: app.globalData.userData
   },
   search(e){
     let cookie = wx.getStorageSync('cookieKey')
@@ -33,7 +34,8 @@ Page({
           wx.setStorageSync('cookieKey', res.header['Set-Cookie']);   //保存Cookie到Storage
         }
         that.setData({
-          result: res.data.result
+          result: res.data.result,
+          userData: res.data.user
         })
 
       },
@@ -63,7 +65,8 @@ Page({
           wx.setStorageSync('cookieKey', res.header['Set-Cookie']);   //保存Cookie到Storage
         }
         that.setData({
-          result:res.data.result
+          result:res.data.result,
+          userData:res.data.user
         })
 
       },

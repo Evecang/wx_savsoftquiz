@@ -1,4 +1,4 @@
-<!-- pages/quiz/quiz_list.wxmla -->
+<!-- pages/quiz/quiz_list.wxml -->
 <view class="container">
   <view class="row">
     <!-- 搜索表单 -->
@@ -13,16 +13,24 @@
     <block wx:for='{{result}}'>
       <view class='grid'>
         <view class='gridBox'>
-          <view class='gridHeader'>
-            <view>Logo</view>
+          <view class='gridHeader' style='background-color:{{bgColor[index%4]}}; color:{{fontColor[index%4]}}'>
+            <view class='iconfont icon-shouji'></view>
             <text>{{item.quiz_name}}</text>
           </view>
           <view class='gridBody'>
             <view class='gridBodyList'>Duration (in min.) {{item.duration}}</view>
-            <view class='gridBodyList'>No. of Questions: {{item.noq}}</view>
-            <view class='gridBodyList'>Allow Maximum Attempts: {{item.maximum_attempts}}</view>
+            <view class='iconfont icon-icon_right gridBodyList'>No. of Questions: {{item.noq}}</view>
+            <view class='iconfont icon-icon_right gridBodyList'>Allow Maximum Attempts: {{item.maximum_attempts}}</view>
           </view>
-          <view class='gridFooter'></view>
+          <view class='gridFooter'>
+            <button >Attempt</button>
+
+            <block wx:if='{{userData.su=="1"}}'>
+            <button ><image src='../../images/edit.png' style='width: 50rpx; height:50rpx;' mode='aspectFit'></image></button>
+            <button ><image src='../../images/delete.png' style='width: 50rpx; height:50rpx;' mode='aspectFit'></image></button>
+            </block>
+
+          </view>
         </view>
       </view>
     </block>

@@ -32,6 +32,6 @@ App({
   globalData: {
     userInfo: null,
     url:"http://localhost:8081/savsoftquiz/index.php/",
-    userDate:null
+    userData:null
   }
 })
