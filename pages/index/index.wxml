@@ -37,22 +37,22 @@
 
         <label>
           <span>Password</span>
-          <input name='password' value="{{editUser.password}}" type='password' focus='{{true}}' placeholder='空则代表不修改密码..'/>
+          <input name='password' value="{{}}" type='password' focus='{{true}}' placeholder='New password..'/>
         </label>
 
         <label>
           <span>First Name</span>
-          <input name='first_name' value="{{editUser.first_name}}"/>
+          <input name='first_name' value="{{userData.first_name}}"/>
         </label>
 
         <label>
           <span>Last Name</span>
-          <input name='last_name' value="{{editUser.last_name}}"/>
+          <input name='last_name' value="{{userData.last_name}}"/>
         </label>
 
         <label>
           <span>Tel</span>
-          <input name='contact_no' value="{{editUser.contact_no}}"/>
+          <input name='contact_no' value="{{userData.contact_no}}"/>
         </label>
 
         <button type='primary' form-type='submit' class='editBtn' loading='{{loading}}'>Submit</button>
