@@ -53,7 +53,7 @@ button::after {
 
 .grid{
   width: 85%;
-  margin: 10rpx 20rpx 0 20rpx;
+  margin: 30rpx 20rpx 0 20rpx;
   /* float: left; */
 }
 
@@ -134,7 +134,6 @@ button::after {
 }
 
 .gridFooter button:nth-child(1){
-  background:rgb(53, 221, 38);
+  border: 1rpx solid #4cae4c;
   height: 60rpx;
-  color: #fff;
 }

@@ -2,7 +2,8 @@
   "pages": [
     "pages/index/index",
     "pages/quiz/quiz_list",
-    "pages/result/result_list"
+    "pages/result/result_list",
+    "pages/quiz_detail/quiz_detail"
   ],
   "window": {
     "backgroundTextStyle": "light",

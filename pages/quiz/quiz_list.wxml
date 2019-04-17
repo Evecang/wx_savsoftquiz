@@ -23,11 +23,11 @@
             <view class='iconfont icon-icon_right gridBodyList'>Allow Maximum Attempts: {{item.maximum_attempts}}</view>
           </view>
           <view class='gridFooter'>
-            <button >Attempt</button>
+            <button hover-class='button-hover' bindtap='quizDetail' data-quid='{{item.quid}}'>Attempt</button>
 
             <block wx:if='{{userData.su=="1"}}'>
-            <button ><image src='../../images/edit.png' style='width: 50rpx; height:50rpx;' mode='aspectFit'></image></button>
-            <button ><image src='../../images/delete.png' style='width: 50rpx; height:50rpx;' mode='aspectFit'></image></button>
+            <button bindtap='editQuiz' ><image src='../../images/edit.png' style='width: 50rpx; height:50rpx;' mode='aspectFit'></image></button>
+            <button bindtap='removeQuiz' ><image src='../../images/delete.png' style='width: 50rpx; height:50rpx;' mode='aspectFit'></image></button>
             </block>
 
           </view>
