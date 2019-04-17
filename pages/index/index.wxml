@@ -23,8 +23,8 @@
         <input name='password' bindinput='passwordInput' type='password' placeholder=' password' class='input' required value='admin'/>
         </label>
         <span class='btn-area'>
-          <button form-type='submit' size='mini' type='primary' loading='{{loading}}'  >login</button>
-          <button form-type='reset' size='mini' type='default'>reset</button>
+          <button form-type='submit' size='mini' type='primary' loading='{{loading}}' hover-class='btnHoverClass' >login</button>
+          <button form-type='reset' size='mini' type='default' hover-class='btnHoverClass' >reset</button>
         </span>
         </view>
     </form>
@@ -63,7 +63,7 @@
           <input name='contact_no' value="{{userData.contact_no}}"/>
         </label>
 
-        <button type='primary' form-type='submit' class='editBtn' loading='{{loading}}'>Submit</button>
+        <button type='primary' form-type='submit' class='editBtn' loading='{{loading}}' hover-class='btnHoverClass'>Submit</button>
       </view>
     </form>
   </block>
