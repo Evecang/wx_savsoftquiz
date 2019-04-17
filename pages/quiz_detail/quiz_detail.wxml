@@ -1,2 +1,62 @@
 <!--pages/quiz_detail/quiz_detail.wxml-->
-<text>pages/quiz_detail/quiz_detail.wxml</text>
+<view class='container pageBg'>
+  <text>Attempt Quiz</text>
+  <view class='containBox'>
+    <view class='detailBox'>
+
+      <view class='detailRow'>
+          <view class='detailKey'>Quiz Name</view>
+          <view class='detailValue'>{{quizDetail.quiz_name}}</view>
+      </view>
+      
+      <view class='detailRow'>
+          <view class='detailKey'>Description</view>
+          <view class='detailValue'>{{quizDetail.duration}}</view>
+      </view>
+      
+      <view class='detailRow'>
+          <view class='detailKey'>Start Date</view>
+          <view class='detailValue'>{{quizDetail.start_date}}</view>
+      </view>
+      
+      <view class='detailRow'>
+          <view class='detailKey'>End Date</view>
+          <view class='detailValue'>{{quizDetail.end_date}}</view>
+      </view>
+      
+      <view class='detailRow'>
+          <view class='detailKey'>Duration (in min.)</view>
+          <view class='detailValue'>{{quizDetail.duration}}</view>
+      </view>
+      
+      <view class='detailRow'>
+          <view class='detailKey'>Allow Maximum Attempts</view>
+          <view class='detailValue'>{{quizDetail.maximum_attempts}}</view>
+      </view>
+      
+      <view class='detailRow'>
+          <view class='detailKey'>Minimum Percentage Required to Pass</view>
+          <view class='detailValue'>{{quizDetail.pass_percentage}}</view>
+      </view>
+      
+      <!-- <view class='detailRow'>
+          <view class='detailKey'>Correct Score</view>
+          <view class='detailValue'>{{quizDetail.correct_score}}</view>
+      </view>
+
+      <view class='detailRow'>
+          <view class='detailKey'>InCorrect Score</view>
+          <view class='detailValue'>{{quizDetail.incorrect_score}}</view>
+      </view> -->
+
+    </view><!--end of detailBox-->
+
+
+    <view class='btnBox'>
+      <button>Start Quiz</button>
+      <button>Back</button>
+    </view>
+
+  </view>
+
+</view>

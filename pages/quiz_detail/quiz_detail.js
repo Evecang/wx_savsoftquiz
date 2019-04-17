@@ -5,15 +5,18 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    quizDetail:null,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.showTabBar();
-    
+    this.setData({
+      quizDetail: wx.getStorageSync('quizDetail')
+    })
+    console.log(this.data.quizDetail)
+
   },
 
   /**
