@@ -23,8 +23,8 @@
 .searchInput{
   float: left;
   min-width: 450rpx;
-  height: 60rpx;
-  line-height: 60rpx;
+  height: 58rpx;
+  line-height: 58rpx;
   border: #aaa 1rpx solid;
   border-top-left-radius: 10rpx;
   border-bottom-left-radius: 10rpx;

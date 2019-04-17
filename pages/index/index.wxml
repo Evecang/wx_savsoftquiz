@@ -1,9 +1,11 @@
 <!--index.wxml-->
 <view class="container" style="background:url({{bgImgAbosoluteUrl}}) no-repeat fixed center;background-size:contain;">
+<view class="drag">
   <view class="userinfo">
     <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo"             bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
     <block wx:else>
       <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <!-- userinfo-nickname displat:none了 -->
       <text class="userinfo-nickname">{{userInfo.nickName}}</text>
     </block>
   </view>
@@ -11,9 +13,15 @@
   <block wx:if="{{showLogin}}">
     <form bindsubmit="formSubmit" bindreset="formReset">
       <view class='login_web' >
-        <text>首次登录</text>
+        <!-- <text>首次登录</text> -->
+        <label>
+        <span class="span">账号</span>
         <input name='email' bindinput='emailInput' type='text' placeholder=' account' class='input' required auto-focus value='admin@example.com'/>
+        </label>
+        <label for="password">
+        <span  class="span">密码</span>
         <input name='password' bindinput='passwordInput' type='password' placeholder=' password' class='input' required value='admin'/>
+        </label>
         <span class='btn-area'>
           <button form-type='submit' size='mini' type='primary' loading='{{loading}}'  >login</button>
           <button form-type='reset' size='mini' type='default'>reset</button>
@@ -60,4 +68,5 @@
     </form>
   </block>
 
+</view>
 </view>
