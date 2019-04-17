@@ -9,7 +9,7 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     loading:false,
-    showLogin:false,
+    showLogin:true,
     userData: null, 
     bgImgAbosoluteUrl:  ''
   },

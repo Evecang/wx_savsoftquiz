@@ -1,2 +1,47 @@
 <!--pages/result/result_list.wxml-->
-<text>pages/result/result_list.wxml</text>
+<view class="container">
+  <view class="row">
+    <!-- 搜索表单 -->
+    <form bindsubmit='search'>
+        <input type="text" class="searchInput" name="search" placeholder=" Search.."/>
+        <button class='searchBtn' form-type="submit">Search</button>
+    </form>
+
+  </view>
+
+  <view class='row'>
+    <block wx:if='{{result && result.length>0}}'>
+      <block wx:for='{{result}}' >
+      <view class='grid'>
+        <view class='gridBox'>
+        
+          <view class='gridHeader' style='background-color:{{bgColor[index%4]}}; color:{{fontColor[index%4]}}'>
+            <view class='iconfont icon-shouji'></view>
+            <text>{{item.quiz_name}}</text>
+          </view>
+
+          <view class='gridBody'>
+            <view class='gridBodyList'>Duration (in min.) {{item.duration}}</view>
+            <view class='iconfont icon-icon_right gridBodyList'>No. of Questions: {{item.noq}}</view>
+            <view class='iconfont icon-icon_right gridBodyList'>Allow Maximum Attempts: {{item.maximum_attempts}}</view>
+          </view>
+
+          <view class='gridFooter'>
+            <button hover-class='button-hover' bindtap='quizDetail' data-quid='{{item.quid}}'>Attempt</button>
+
+            <block wx:if='{{userData.su=="1"}}'>
+            <button bindtap='editQuiz' ><image src='../../images/edit.png' style='width: 50rpx; height:50rpx;'  mode='aspectFit'></image></button>
+            <button bindtap='removeQuiz' ><image src='../../images/delete.png' style='width: 50rpx; height:50rpx;' mode='aspectFit'></image></button>
+            </block>
+
+          </view>
+
+        </view>
+      </view>
+      </block>
+    </block>
+    <block wx:else>
+        <text>没有考试结果！</text>
+    </block>
+  </view>
+  </view>

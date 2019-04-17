@@ -135,5 +135,6 @@ button::after {
 
 .gridFooter button:nth-child(1){
   border: 1rpx solid #4cae4c;
+  line-height: 60rpx;
   height: 60rpx;
 }
