@@ -71,7 +71,7 @@ button::after {
 }
 
 .gridHeader{
-  font-size: 16px;
+  font-size: 19px;
   font-weight: 900;
   width: 100%;
   height: 30%;
@@ -137,4 +137,5 @@ button::after {
   border: 1rpx solid #4cae4c;
   line-height: 60rpx;
   height: 60rpx;
+  background-color: #fff;
 }

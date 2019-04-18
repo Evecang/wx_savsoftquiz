@@ -1,6 +1,6 @@
 <!--pages/quiz_detail/quiz_detail.wxml-->
 <view class='container pageBg'>
-  <text>Attempt Quiz</text>
+  <!-- <text>Attempt Quiz</text> -->
   <view class='containBox'>
     <view class='detailBox'>
 
@@ -11,7 +11,7 @@
       
       <view class='detailRow'>
           <view class='detailKey'>Description</view>
-          <view class='detailValue'>{{quizDetail.duration}}</view>
+          <view class='detailValue'>{{quizDetail.description}}</view>
       </view>
       
       <view class='detailRow'>
@@ -53,8 +53,8 @@
 
 
     <view class='btnBox'>
-      <button>Start Quiz</button>
-      <button>Back</button>
+      <button bindtap='startQuiz'>Start Quiz</button>
+      <button bindtap='back'>Back</button>
     </view>
 
   </view>

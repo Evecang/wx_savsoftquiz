@@ -6,7 +6,6 @@
         <input type="text" class="searchInput" name="search" placeholder=" Search.."/>
         <button class='searchBtn' form-type="submit">Search</button>
     </form>
-
   </view>
 
   <view class='row'>
