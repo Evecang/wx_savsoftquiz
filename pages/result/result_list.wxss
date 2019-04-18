@@ -98,6 +98,7 @@ button::after {
 }
 .gridBody :nth-child(2){
   height: 28%;
+  line-height: 28%;
 }
 .gridBody :nth-child(3){
   height: 34%;
@@ -110,6 +111,7 @@ button::after {
   text-align: center;
   overflow: scroll;
   display: flex;
+  vertical-align: center;
   align-items: center;
   justify-content: center;
 }

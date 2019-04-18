@@ -3,6 +3,7 @@
     "pages/index/index",
     "pages/quiz/quiz_list",
     "pages/result/result_list",
+    "pages/view_result/view_result",
     "pages/quiz_detail/quiz_detail",
     "pages/quiz_attempt/quiz_attempt"
   ],

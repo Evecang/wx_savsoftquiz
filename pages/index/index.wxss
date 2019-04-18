@@ -30,8 +30,6 @@
   flex-direction:column;
   align-items:center;
   justify-content: flex-start;
-  /* padding-left:20rpx;
-  padding-right:20rpx; */
   overflow: scroll
 }
 
@@ -163,7 +161,7 @@
  border-right: none;
  border-top-left-radius: 15rpx;
  border-bottom-left-radius: 15rpx;
- box-shadow: -5rpx 0 6rpx rgb(248, 242, 242);
+ /* box-shadow: 0 3rpx 6rpx rgb(248, 242, 242); */
  padding: 0 10rpx;
  position: relative;
 }
@@ -193,7 +191,7 @@
   border-left: none;
   border-top-right-radius: 15rpx;
   border-bottom-right-radius: 15rpx;
-  box-shadow: 3rpx 0  3rpx rgb(248, 242, 242);
+  /* box-shadow: 0 3rpx  6rpx rgb(248, 242, 242); */
   padding: 0 10rpx;
 }
 
