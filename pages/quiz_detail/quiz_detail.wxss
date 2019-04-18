@@ -10,7 +10,7 @@ page{
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding: 10rpx 20rpx;
+  padding: 0 20rpx;
   box-sizing: border-box;
   overflow: scroll;
 } 

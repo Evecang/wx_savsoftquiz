@@ -127,7 +127,11 @@ Page({
         })
       },
       fail(res) {
-        console.log('获取考试列表失败')
+        wx.showModal({
+          title: '错误',
+          content: '获取考试列表失败，请查看网络',
+          showCancel: false
+        })
       }
     })
   },
@@ -151,11 +155,20 @@ Page({
         })
         //跳转至详情页面
         wx.navigateTo({
-          url: '../quiz_detail/quiz_detail'
+          url: '../quiz_detail/quiz_detail' +'?quid='+quid
         })
       },
       fail:res =>{
-        console.log('get quid detail failed')
+        wx.showModal({
+          title: '错误',
+          content: '请求失败，请查看网络',
+          showCancel: false,
+          success(r){
+            wx.navigateTo({
+              url: '../quiz_detail/quiz_detail'
+            })
+          }
+        })
       }
     })
 
@@ -193,7 +206,12 @@ Page({
 
       },
       fail(res){
-        console.log('初始化考试列表失败')
+        wx.showModal({
+          title: '错误',
+          content: '初始化考试列表失败，请查看网络',
+          showCancel: false
+        })
+
       }
     })
   },

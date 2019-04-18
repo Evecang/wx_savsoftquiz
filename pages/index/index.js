@@ -70,8 +70,11 @@ Page({
               that.setData({ loading: false})
             },
             fail:res =>{
-              console.log('login fail return :>>>>')
-              console.log(res)
+              wx.showModal({
+                title: '错误',
+                content: '请求，请查看网络',
+                showCancel: false
+              })
             }
           })
         }
