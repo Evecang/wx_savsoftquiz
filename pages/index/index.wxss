@@ -141,7 +141,8 @@
   padding:20rpx;
   border: 1rpx solid #aaa;
   border-radius:20rpx;
-  overflow: hidden
+  overflow: hidden;
+  background: -webkit-linear-gradient(60deg,rgba(245, 255, 250, 0.5) 25%,transparent);
 }
 
 .userDetail label{

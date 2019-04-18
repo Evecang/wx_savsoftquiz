@@ -8,7 +8,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    result:null
+    result:null,
+    percentile:null
   },
 
   /**
@@ -23,7 +24,8 @@ Page({
         result = wx.getStorageSync('quizResultDetail')
     if(result){
       this.setData({
-        result:result
+        result:result,
+        percentile: that.calcPercentile(result.result.percentile)
       })
     }
 
@@ -45,7 +47,8 @@ Page({
             data: data
           })
           that.setData({
-            result: data.result
+            result: data.result,
+            percentile: that.calcPercentile(data.result.percentile)
           })
           console.log(data.message)
         }else{
@@ -60,6 +63,13 @@ Page({
     })
   },
 
+  calcPercentile(arr){
+
+    arr = Array.isArray(arr)?arr:[arr];
+    let str = (((arr[1] + 1) / arr[0]) * 100).toString();
+    return str.substr(0,5);
+
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

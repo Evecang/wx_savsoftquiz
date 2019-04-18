@@ -1,4 +1,8 @@
 /* pages/view_result/view_result.wxss */
+.container{
+  padding:30rpx 0;
+  overflow: scroll
+}
 .row{
   display: flex;
   flex-direction:row;
