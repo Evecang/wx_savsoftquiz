@@ -11,7 +11,7 @@
 
   <view class='row'>
     <block wx:if='{{result && result.length>0}}'>
-      <block wx:for='{{result}}' >
+      <block wx:for='{{result}}' wx:key="{{result.rid}}">
       <view class='grid'>
         <view class='gridBox'>
         
@@ -21,9 +21,8 @@
           </view>
 
           <view class='gridBody'>
-            <view class='gridBodyList'>Duration (in min.) {{item.duration}}</view>
-            <view class='iconfont icon-icon_right gridBodyList'>No. of Questions: {{item.noq}}</view>
-            <view class='iconfont icon-icon_right gridBodyList'>Allow Maximum Attempts: {{item.maximum_attempts}}</view>
+            <view class='gridBodyList'>status： <span style="color:{{item.result_status=='Pass'?'green':item.result_status=='Fail'?'red':'yellow'}};display:inline-block">{{item.result_status}}</span></view>
+            <view class='iconfont icon-icon_right gridBodyList'>Percentage: {{item.percentage_obtained}}%</view>
           </view>
 
           <view class='gridFooter'>

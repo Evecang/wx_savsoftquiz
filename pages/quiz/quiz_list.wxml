@@ -10,7 +10,7 @@
   </view>
 
   <view class='row'>
-    <block wx:for='{{result}}'>
+    <block wx:for='{{result}}' wx:key="{{result.quid}}">
       <view class='grid'>
         <view class='gridBox'>
           <view class='gridHeader' style='background-color:{{bgColor[index%4]}}; color:{{fontColor[index%4]}}'>
