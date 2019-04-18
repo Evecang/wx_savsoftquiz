@@ -3,7 +3,8 @@
     "pages/index/index",
     "pages/quiz/quiz_list",
     "pages/result/result_list",
-    "pages/quiz_detail/quiz_detail"
+    "pages/quiz_detail/quiz_detail",
+    "pages/view_result/view_result"
   ],
   "window": {
     "backgroundTextStyle": "light",

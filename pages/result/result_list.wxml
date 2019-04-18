@@ -12,7 +12,7 @@
   <view class='row'>
     <block wx:if='{{result && result.length>0}}'>
       <block wx:for='{{result}}' wx:key="{{result.rid}}">
-      <view class='grid'>
+      <view class='grid' bindtap='quizResultDetail' data-rid='{{item.rid}}'>
         <view class='gridBox'>
         
           <view class='gridHeader' style='background-color:{{bgColor[index%4]}}; color:{{fontColor[index%4]}}'>
@@ -26,11 +26,11 @@
           </view>
 
           <view class='gridFooter'>
-            <button hover-class='button-hover' bindtap='quizDetail' data-quid='{{item.quid}}'>Attempt</button>
+            <!-- <button hover-class='button-hover' bindtap='quizDetail' data-quid='{{item.quid}}'>Attempt</button> -->
 
+<!-- TODO:这里管理员并不显示 -->
             <block wx:if='{{userData.su=="1"}}'>
-            <button bindtap='editQuiz' ><image src='../../images/edit.png' style='width: 50rpx; height:50rpx;'  mode='aspectFit'></image></button>
-            <button bindtap='removeQuiz' ><image src='../../images/delete.png' style='width: 50rpx; height:50rpx;' mode='aspectFit'></image></button>
+            <button bindtap='removeQuiz' ><image src='../../images/cross.png' style='width: 50rpx; height:50rpx;' mode='aspectFit'></image></button>
             </block>
 
           </view>

@@ -1,0 +1,22 @@
+<!--pages/view_result/view_result.wxml-->
+<view class='container'>
+<view class='row'>
+  <text>{{result.result.first_name}} {{result.result.last_name}} 这是你第 {{result.attempt}} 次考试的结果</text>
+  <text>{{result.result.quiz_name}} </text>
+</view>
+<view class='row'> 
+  <text><span>score_obtained</span>{{result.result.score_obtained}}</text>
+</view> 
+<view class='row'> 
+  <text><span>time_spent</span>{{result.result.time_spent}}</text>
+</view> 
+<view class='row'> 
+  <text><span>attempt_time</span>{{result.result.attempt_time}}</text>
+</view> 
+<view class='row'> 
+  <text><span>percentage_obtained</span>{{result.result.percentage_obtained}}</text>
+</view> 
+<view class='row'> 
+  <text><span>percentile_obtained</span>{{result.result.percentage_obtained}}</text>
+</view> 
+</view>

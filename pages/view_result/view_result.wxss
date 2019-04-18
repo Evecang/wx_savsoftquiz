@@ -1,0 +1,9 @@
+/* pages/view_result/view_result.wxss */
+.row{
+  display: flex;
+  flex-direction:row;
+  justify-content: space-between;
+  align-items:center;
+  flex-wrap: wrap;
+  padding:30rpx 0;
+}

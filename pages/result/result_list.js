@@ -44,6 +44,41 @@ Page({
       }
     })
   },
+  //不发送请求，直接定向到 view_result 界面
+  quizResultDetail(e) {
+    var dataset = e.currentTarget.dataset
+    var rid = dataset.rid
+    //跳转至详情页面
+    wx.navigateTo({
+      url: '../view_result/view_result?rid='+rid
+    })
+    // let cookie = wx.getStorageSync('cookieKey')
+    // let header = {}
+    // if (cookie) {
+    //   header.Cookie = cookie;
+    // }
+    // wx.request({
+    //   url: URL + 'result/wx_view_result/' + rid,
+    //   header: header,
+    //   method: 'GET',
+    //   success: res => {
+    //     console.log(`跳转到view_result页面 ，quizResultDetail 函数取得是数据是: `)
+    //     console.log(res)
+    //     wx.setStorage({
+    //       key: 'quizResultDetail',
+    //       data: res.data
+    //     })
+    //     //跳转至详情页面
+    //     wx.navigateTo({
+    //       url: '../view_result/view_result'
+    //     })
+    //   },
+    //   fail: res => {
+    //     console.log('get quid result detail failed')
+    //   }
+    // })
+
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
