@@ -2,6 +2,8 @@
 const app = getApp()
 const URL = app.globalData.url;
 
+//TODO：后台排名函数未验证
+
 Page({
 
   /**
@@ -9,7 +11,9 @@ Page({
    */
   data: {
     result:null,
-    percentile:null
+    percentile:null,
+    startTime:null,
+    attempt:null
   },
 
   /**
@@ -25,7 +29,9 @@ Page({
     if(result){
       this.setData({
         result:result,
-        percentile: that.calcPercentile(result.result.percentile)
+        percentile: that.calcPercentile(result.result.percentile),
+        startTime: that.getMyDate(result.result.result.start_time),
+        attempt: that.ordinal(result.result.attempt)
       })
     }
 
@@ -48,7 +54,9 @@ Page({
           })
           that.setData({
             result: data.result,
-            percentile: that.calcPercentile(data.result.percentile)
+            percentile: that.calcPercentile(data.result.percentile),
+            startTime: that.getMyDate(data.result.result.start_time),
+            attempt: that.ordinal(data.result.attempt)
           })
           console.log(data.message)
         }else{
@@ -69,6 +77,38 @@ Page({
     let str = (((arr[1] + 1) / arr[0]) * 100).toString();
     return str.substr(0,5);
 
+  },
+
+  //补零操作
+  addZero(num) {
+    if (parseInt(num) < 10) {
+      num = '0' + num;
+    }
+    return num;
+  },
+  getMyDate(str) {
+    while (str.length < 13) {
+      str += '0';
+    }
+    str = +str;
+    console.log(str)
+    var oDate = new Date(str),
+      oYear = oDate.getFullYear(),
+      oMonth = oDate.getMonth() + 1,
+      oDay = oDate.getDate(),
+      oHour = oDate.getHours(),
+      oMin = oDate.getMinutes(),
+      oSen = oDate.getSeconds(),
+      oTime = oYear + '-' + this.addZero(oMonth) + '-' + this.addZero(oDay) + ' ' + this.addZero(oHour) + ':' + this.addZero(oMin) + ':' +       this.addZero(oSen);
+        return oTime;
+  },
+
+  ordinal(number) {	//number为no_attempt参与测试试卷的次数，判断要添加的英文数字后缀
+    const ends = ['th', 'st', 'nd', 'rd', 'th', 'th', 'th', 'th', 'th', 'th'];
+    if(((number % 100) >= 11) && ((number % 100) <= 13))
+      return number + 'th';
+    else
+        return number +'' + ends[number % 10];
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

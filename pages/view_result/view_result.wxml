@@ -1,25 +1,44 @@
 <!--pages/view_result/view_result.wxml-->
 <view class='container'>
-<view class='row'>
-  <text>{{result.result.first_name}} {{result.result.last_name}} 你第 {{result.attempt}} 次考试</text>
-  <text>{{result.result.quiz_name}} </text>
-</view>
-<view class='row'> 
-  <text><span>score_obtained</span>{{result.result.score_obtained}}</text>
-</view> 
-<view class='row'> 
-  <text><span>time_spent</span>{{result.result.time_spent}}</text>
-</view> 
-<view class='row'> 
-  <text><span>attempt_time</span>{{result.result.attempt_time}}</text>
-</view> 
-<view class='row'> 
-  <text><span>percentage_obtained</span>{{result.result.percentage_obtained}}</text>
-</view> 
-<view class='row'> 
-  <text><span>percentile_obtained</span>{{percentile}}%</text>
-</view>
-<view class='row'> 
-  <text><span>status</span>{{result.result.status}}</text>
-</view> 
+
+  <view class='bg'>
+    <view class='resultQuiz'>
+      <view>{{result.result.first_name}} {{result.result.last_name}}</view>
+      <view style="color:#fff;font-size:40rpx;">This is your {{attempt}} attempt</view>
+      <view>{{result.result.quiz_name}} </view>
+    </view>
+
+    <view class='resultDetail resultDetailKey'>
+      <view class='resultDetailBox'>
+        <view>Score_obtained</view>
+        <view class='resultDetailVal'>{{result.result.score_obtained}}</view>
+      </view>
+      <view class='resultDetailBox'>
+        <view>Time_spent</view>
+        <view class='resultDetailVal'>{{result.result.total_time}}</view>
+      </view>
+      <view class='resultDetailBox'>
+        <view>Attempt_time</view>
+        <view class='resultDetailVal'>{{startTime}}</view>
+      </view>
+      <view class='resultDetailBox'>
+        <view>Percentage_obtained</view>
+        <view class='resultDetailVal'>{{result.result.percentage_obtained}}</view>
+      </view>
+      <view class='resultDetailBox'>
+        <view>Percentile_obtained</view>
+        <view class='resultDetailVal'>{{percentile}}%</view>
+      </view>
+      <view class='resultDetailBox'>
+        <view>Status</view>
+        <view class='resultDetailVal'>{{result.result.result_status}}</view>
+      </view>
+    </view>
+    <view>
+      <button hover-class='btnHoverClass'>Answer Sheet</button>
+    </view>
+    <view class='resultMore resultDetailKey'>
+      <text space="ensp">Rusult ID {{result.result.rid}}  {{result.result.uid}}  Email: {{result.result.email}}</text>
+    </view>
+  </view>
 </view>
