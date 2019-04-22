@@ -1,0 +1,37 @@
+
+var getAllAnswer = function (options_qid, saved_ans, qid){
+
+  var result = saved_ans[qid].map(function(item){
+
+    var itemArr = item.split("___"),
+        option = itemArr[0],
+        ansChoice = itemArr[1]
+    
+    return {
+      option:option,
+      ansChoice:ansChoice
+    }
+  })
+
+  var options_qid_item = options_qid[qid]
+
+  result.forEach(function(item){
+
+    options_qid_item.forEach(function(oItem){
+
+      if (item.option == oItem.q_option){
+
+        item.q_option_match = oItem.q_option_match;
+      }
+    })
+    
+  })
+
+  console.log('_____________________',result)
+
+  return result
+}
+
+module.exports = {
+  getAllAnswer:getAllAnswer
+}

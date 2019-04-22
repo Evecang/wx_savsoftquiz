@@ -1,0 +1,145 @@
+<!--pages/result_answerSheet/answer_sheet.wxml-->
+<view class='container'>
+
+  <block wx:for="{{result.questions}}" wx:for-item="question" wx:for-index="qk" wx:key="{{question.qid}}">
+    <view class='answerBox' style="background-color:{{answerBoxColor[ind_score[qk]-1]}}">
+      <view class='answerOlder'>
+        <view class='qusCircle'>
+          <text>{{qk+1}}</text>
+        </view>
+
+        <!-- 正确错误小图标 -->
+        <view class='iconfont {{rightOrWrong[ind_score[qk]-1]}}'></view>
+      </view>
+
+      <view class='answerContent'>
+
+        <view>{{question['question']}}</view>
+        <!-- <view>{{question['question_type']}}</view> -->
+
+        <!-- 单选、双选 (合并一起写在一个 block) -->
+        <block wx:if="{{question['question_type']=='Multiple Choice Single Answer' || question['question_type']=='Multiple Choice Multiple Answer'}}">
+
+          <view>
+            <text>Your Answer: </text>
+            <block wx:for="{{result.options}}" wx:for-item="option" wx:for-index="indexOp" wx:key="indexOp">
+              <block wx:for="{{saved_ans[question['qid']]}}" wx:for-item="saveans" wx:for-index="indexsA" wx:key="indexsA">
+                <text wx:if="{{option['oid'] == saveans }}"><text wx:if="{{indexsA!=0}}"> , </text>{{option['q_option']}}</text>
+              </block>
+            </block>
+          </view>
+
+          <view>
+            <text>Correct Options: </text>
+            <block wx:for="{{options_qid[question['qid']]}}" wx:key="index">
+              <text wx:if="{{item['score']>=0.1}}"><text wx:if="{{index>0}}"> , </text>{{item['q_option']}}</text>
+            </block>
+          </view>
+
+          <view wx:if="{{question['description'] != ''}}">
+            <text>Description: </text>
+            <text>{{question['description']}}</text>
+          </view>
+
+        </block>
+
+        <!-- 短简答题 -->
+        <block wx:elif="{{question['question_type']=='Short Answer'}}">
+
+          <view>
+            <text>Your Answer: </text>
+            <text>{{saved_ans[question['qid']]}}</text>
+          </view>
+
+          <view>
+            <text>Correct Answer: </text>
+            <text>{{options_qid[question['qid']][0]['q_option']}}</text>
+          </view>
+
+          <view wx:if="{{question['description'] != ''}}">
+            <text>Description: </text>
+            <text>{{question['description']}}</text>
+          </view>
+
+        </block>
+
+        <!-- 长简答题 , 这里有TODO！ -->
+        <block wx:elif="{{question['question_type']=='Long Answer'}}">
+
+          <view>
+            <text>Your Answer: </text>
+            <text>{{saved_ans[question['qid']]}}</text>
+
+            <!-- TODO:提交图片的情况，在这里显示用户答案 saced_ans[question['qid']] -->
+            <image wx:if="{{false}}" src="{{}}"></image>
+
+          </view>
+
+          <view>
+            <text>Suggest Answer: </text>
+            <!-- 如果是 pending 状态就显示 pending ,  有 analyses 字段就给参考答案，否则显示没有参考答案 -->
+            <block wx:if="{{ind_score[qk] == 3}}">
+              <text>Peding...</text>
+            </block>
+            <block wx:elif="{{!!question['analyses']}}">
+              <text>{{question['analyses']}}</text>
+
+              <!-- TODO：答案是图片的情况，在这里修改图片路劲 question.ansImageSrc -->
+              <image wx:if="{{false}}" src="{{}}"></image>
+
+            </block>
+            <block wx:else>
+              <text>There is no suggest answer!</text>
+            </block>
+          </view>
+
+          <view wx:if="{{question['description'] != ''}}">
+            <text>Description: </text>
+            <text>{{question['description']}}</text>
+          </view>
+
+        </block>
+
+        <!-- 匹配题 -->
+        <block wx:elif="{{question['question_type']=='Match the Column'}}">
+
+          <view class='matchColumnGrid'>
+          <text></text>
+          <text></text>
+          <text>YourAnswer</text>
+          <text>CorrectAnswer</text>
+          </view>
+          <wxs module='tool'>
+            var m2 = function(arr){
+              var a = [];
+              for(var i=0;i<arr.length;i++){
+                a.push(arr[i].split('___')[1]);
+              }
+              return a;
+            }
+            
+            module.exports = {
+              m2:m2
+            }
+          </wxs>
+          <block wx:for='{{options_qid[question.qid]}}' wx:for-index='ok'wx:for-item='option' wx:key="ok">
+            <view class='matchColumnGrid'>
+            <text>{{adc[ok]}}) </text>
+              <text>{{option.q_option}}</text>
+              <text style='text-align:center'>{{tool.m2(saved_ans[question.qid])[ok] }}</text>
+              <text style='text-align:center'>{{option.q_option_match}}</text>
+            </view>
+          </block>
+
+          <view wx:if="{{question['description'] != ''}}">
+            <text>Description: </text>
+            <text>{{question['description']}}</text>
+          </view>
+
+        </block>
+
+      </view>
+    </view>
+  </block>
+
+</view>

@@ -1,0 +1,53 @@
+/* pages/result_answerSheet/answer_sheet.wxss */
+@import "../../icons/result_answer_sheet.wxss";
+
+.container{
+  padding:50rpx;
+  justify-content: flex-start;
+  overflow: scroll;
+}
+
+.answerBox{
+  display: grid;
+  grid-template-columns: 20% 80%;
+  width: 100%;
+  margin-top:30rpx;
+  color: #fff
+}
+
+.answerOlder{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.qusCircle{
+  border:1rpx solid #fff;
+  border-radius: 50%;
+  color:#4b7d42;
+  width:80rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  margin-bottom: 20rpx;
+  background-color:#fff;
+  text-align:center;
+}
+
+.answerContent{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-content: center
+}
+
+.answerContent view{
+  font-size: 35rpx;
+  margin:10rpx;
+}
+
+.matchColumnGrid{
+  display: grid;
+  grid-template-columns: 15% 20% auto auto;
+}

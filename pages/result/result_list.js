@@ -11,7 +11,7 @@ Page({
     result:null,
     quiz_list:null,
     userData: app.globalData.userData,
-    bgColor: ['#dff0d8', '#fcf8e3', '#d9edf7', '#f2dcf2'],
+    bgColor: ['#dff0d8', '#fcf8e3', '#d9edf7', '#f2dcf2']
   },
 
   /**
@@ -52,31 +52,6 @@ Page({
     wx.navigateTo({
       url: '../view_result/view_result?rid='+rid
     })
-    // let cookie = wx.getStorageSync('cookieKey')
-    // let header = {}
-    // if (cookie) {
-    //   header.Cookie = cookie;
-    // }
-    // wx.request({
-    //   url: URL + 'result/wx_view_result/' + rid,
-    //   header: header,
-    //   method: 'GET',
-    //   success: res => {
-    //     console.log(`跳转到view_result页面 ，quizResultDetail 函数取得是数据是: `)
-    //     console.log(res)
-    //     wx.setStorage({
-    //       key: 'quizResultDetail',
-    //       data: res.data
-    //     })
-    //     //跳转至详情页面
-    //     wx.navigateTo({
-    //       url: '../view_result/view_result'
-    //     })
-    //   },
-    //   fail: res => {
-    //     console.log('get quid result detail failed')
-    //   }
-    // })
 
   },
 

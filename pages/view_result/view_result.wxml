@@ -14,6 +14,10 @@
         <view class='resultDetailVal'>{{result.result.score_obtained}}</view>
       </view>
       <view class='resultDetailBox'>
+        <view>Rank</view>
+        <view class='resultDetailVal'>{{result.rank}}</view>
+      </view>
+      <view class='resultDetailBox'>
         <view>Time_spent</view>
         <view class='resultDetailVal'>{{result.result.total_time}}</view>
       </view>
@@ -25,20 +29,21 @@
         <view>Percentage_obtained</view>
         <view class='resultDetailVal'>{{result.result.percentage_obtained}}</view>
       </view>
-      <view class='resultDetailBox'>
+      <!-- <view class='resultDetailBox'>
         <view>Percentile_obtained</view>
         <view class='resultDetailVal'>{{percentile}}%</view>
-      </view>
+      </view> -->
       <view class='resultDetailBox'>
         <view>Status</view>
         <view class='resultDetailVal'>{{result.result.result_status}}</view>
       </view>
     </view>
     <view>
-      <button hover-class='btnHoverClass'>Answer Sheet</button>
+      <button hover-class='btnHoverClass' bindtap="viewAnswer">Answer Sheet</button>
     </view>
     <view class='resultMore resultDetailKey'>
       <text space="ensp">Rusult ID {{result.result.rid}}  {{result.result.uid}}  Email: {{result.result.email}}</text>
     </view>
   </view>
+
 </view>

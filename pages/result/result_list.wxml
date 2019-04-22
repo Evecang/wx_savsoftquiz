@@ -1,13 +1,13 @@
 <!--pages/result/result_list.wxml-->
 <view class="container">
-  <view class="row">
+  <!-- <view class="row">
     <!-- 搜索表单 -->
-    <form bindsubmit='search'>
+    <!-- <form bindsubmit='search'>
         <input type="text" class="searchInput" name="search" placeholder=" Search.."/>
         <button class='searchBtn' form-type="submit">Search</button>
     </form>
 
-  </view>
+  </view> -->
 
   <view class='row'>
     <block wx:if='{{result && result.length>0}}'>
@@ -21,11 +21,14 @@
           </view>
 
           <view class='gridBody'>
-            <view class='gridBodyList'>status： <span style="color:{{item.result_status=='Pass'?'green':item.result_status=='Fail'?'red':'yellow'}};display:inline-block">{{item.result_status}}</span></view>
+            <view class='gridBodyList'>status： <text style="color:{{item.result_status=='Pass'?'green':item.result_status=='Fail'?'red':'yellow'}};display:inline-block">{{item.result_status}}</text></view>
             <view class='iconfont icon-icon_right gridBodyList'>Percentage: {{item.percentage_obtained}}%</view>
+            <view class='gridBodyList'>Result ID: {{item.rid}}</view>
           </view>
 
           <view class='gridFooter'>
+
+
             <!-- <button hover-class='button-hover' bindtap='quizDetail' data-quid='{{item.quid}}'>Attempt</button> -->
 
 <!-- TODO:这里管理员并不显示 -->
