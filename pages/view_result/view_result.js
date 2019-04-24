@@ -144,7 +144,7 @@ Page({
         return number +'' + ends[number % 10];
   },
 
-  viewAnswer(){
+  viewAnswer(){ //跳转至 查看答案界面
 
     const result = wx.getStorageSync('quizResultDetail')
 
@@ -193,7 +193,9 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    wx.switchTab({
+      url: 'view_result',
+    })
   },
 
   /**

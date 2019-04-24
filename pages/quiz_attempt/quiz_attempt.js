@@ -18,8 +18,7 @@ Page({
 
     saved_ans:[],
     options_qid:[],
-    match_option:[],
-    match_option_value:[],
+    match_option:[],  //右边的匹配项 [qid][A,B,C,D]
 
     noq:0,  //quiz中
     qn:0, //当前
@@ -30,7 +29,68 @@ Page({
     ind_time: [],    //记录每道题用时
     ctime:0,  //记录每道题用时的辅助变量，每秒+1，调用setIndTime时重置为0
     incTime:null, //循环标记1
-    setIndTime:null //循环标记2
+    setIndTime:null, //循环标记2
+    autoSubmit:null,//自动提交的函数
+
+    timer: '', //定时器的名称
+    timeStr:'', //剩余时间 字符串形式 
+
+  },
+  leadingZero:function(time) {
+    return(time < 10) ?"0" + time : + time;
+  },
+  updateTimer:function(seconds){
+    var Seconds = seconds;
+    if (seconds == undefined || seconds == null) { Seconds = parseInt(this.data.seconds); }
+    var Days = Math.floor(Seconds / 86400);
+    Seconds -= Days * 86400;
+    var Hours = Math.floor(Seconds / 3600);
+    Seconds -= Hours * (3600);
+    var Minutes = Math.floor(Seconds / 60);
+    Seconds -= Minutes * (60);
+    var TimeStr = ((Days > 0) ? Days + " days " : "") + this.leadingZero(Hours) + ":" + this.leadingZero(Minutes) + ":" + this.leadingZero(Seconds)
+    // this.setData({ timeStr:TimeStr })
+    return TimeStr;
+  },
+  submitform() {  //在onload setTimeOut到点自动执行
+    wx.showModal({
+      title: '提示',
+      content: 'Time Over',
+      showCancel: false,
+      success: r => {
+        //quiz/submit_quiz
+        // this.submit_quiz()
+
+        this.setIndividual_time(this.data.qn);
+        //submit_quiz
+        let cookie = wx.getStorageSync('cookieKey')
+        let header = {}
+        if (cookie) {
+          header.Cookie = cookie;
+        }
+        wx.request({
+          url: URL + 'quiz/wx_submit_quiz',
+          header: header,
+          success: res => {
+            console.log('发送提交试卷请求成功')
+            console.log(res)
+            if (res && res.header && res.header['Set-Cookie']) {
+              wx.setStorageSync('cookieKey', res.header['Set-Cookie']);   //保存Cookie到Storage
+            }
+            //result/view_result/ $rid
+            // wx.switchTab({
+            //   url: '../result/result_list',
+            // })
+          },
+          fail: res => {}
+        })
+        if (r.confirm) {
+          wx.switchTab({
+            url: '../result/result_list',
+          })
+        }
+      }
+    })
   },
 
   show_question:function(vqn){
@@ -139,6 +199,7 @@ Page({
   increasectime: function(){
     this.setData({ ctime: this.data.ctime+1 })
   },
+
   setIndividual_time: function(cqn){
     console.log('执行了setIndividual函数————————————————————————————')
     console.log(`传进来的参数是：${cqn}`)
@@ -311,6 +372,8 @@ Page({
           if(!options_qid[question.qid]){
             options_qid[question.qid] = []
           }
+          options_qid[question.qid].push(option)
+
           if (question.question_type =='Match the Column'){
             //match_option 右匹配项
             var match_option = this.data.match_option
@@ -321,10 +384,12 @@ Page({
                 match_option[n] = this.shuffle(match_option[n])
               }
             }
-            // match_option = this.shuffle(match_option)
-            this.setData({ match_option: match_option })
+            this.setData({ match_option: match_option }, function () { 
+            //   console.log(`match_option：`) 
+            // console.log(this.data.match_option)
+            })
           }
-          options_qid[question.qid].push(option)
+          
         }
       }
     }
@@ -416,7 +481,25 @@ Page({
               that.show_question('0') //
               var incTime = setInterval(that.increasectime, 1000);
               var setIndTime = setInterval(that.setIndividual_time, 30000);
-              this.setData({ incTime: incTime, setIndTime: setIndTime })
+              var autoSubmit = setTimeout(that.submitform, data.seconds*1000);
+              that.setData({ incTime: incTime, setIndTime: setIndTime, autoSubmit: autoSubmit })
+
+              let seconds = data.seconds
+              that.setData({
+                timer:setInterval(function(){
+                  seconds--
+                  that.setData({ seconds : seconds, timeStr:that.updateTimer(seconds) })
+                  if(seconds <= 0){
+                    clearInterval(that.data.timer)
+                    wx.showToast({
+                      title: "Time's up!",
+                      icon:'none'
+                    })
+
+                  }
+
+                },1000)
+              })
 
               that.mySavedAns()
               that.myOptions()
@@ -441,7 +524,7 @@ Page({
               showCancel: false,
               success(r) {
                 wx.switchTab({
-                  url: '../' + result.url
+                  url: '../result/result_list'
                 })
               }
             })
@@ -479,6 +562,7 @@ Page({
   onHide: function () {
     clearInterval(this.data.incTime)
     clearInterval(this.data.setIndTime)
+    clearTimeout(this.data.autoSubmit)
     this.setIndividual_time()
   },
 
@@ -488,6 +572,7 @@ Page({
   onUnload: function () {
     clearInterval(this.data.incTime)
     clearInterval(this.data.setIndTime)
+    clearTimeout(this.data.autoSubmit)
     this.setIndividual_time()
   },
 

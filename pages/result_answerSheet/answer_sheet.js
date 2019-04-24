@@ -14,7 +14,8 @@ Page({
     matchColumnAns:[],
     adc:['A','B','C','D','E','F','G','H','I','J','K'],
     ind_score:null,
-    answerBoxColor: ['#71ba5d', '#ff5e5e', '#fdfbcf', '#9fcdf4'],
+    answerBoxColor: ['#fff','#71ba5d', '#ff5e5e', '#fdfbcf', '#9fcdf4'], //白、绿、红、黄、蓝
+    answerFontColor:['#000','#fff','#fff','#000','#fff'],
     rightOrWrong: ['icon-dagou', 'icon-cuowu', '']
     // match_option:[]
 
@@ -36,7 +37,11 @@ Page({
       return;
     }
 
-    const ind_score = result.result.score_individual.split(',');
+    var ind_score = result.result.score_individual.split(',');
+    //解析遇到4- 的情况
+    for(var i=0; i<ind_score.length; i++){
+      if(ind_score[i][0]=='4'){ ind_score[i]=4}
+    }
 
     this.setData({
       result,
@@ -59,8 +64,7 @@ Page({
   },
 
   mySavedAns: function () {
-    
-    //示爱ved_ans对应每道题的作答情况
+    //sved_ans对应每道题的作答情况
     var saved_ans = [];
     var result = this.data.result;
     var questions = result.questions
@@ -70,6 +74,8 @@ Page({
       switch (question.question_type) {
         case 'Multiple Choice Single Answer':
         case 'Multiple Choice Multiple Answer':
+        case 'Match the Column':
+        case 'Cloze Test':
           saved_answers.forEach(function (saved_answer, svk, array) {
             if (question.qid == saved_answer.qid) {
               if (!saved_ans[question.qid]) { saved_ans[question.qid] = [] }
@@ -85,24 +91,6 @@ Page({
               // saved_ans = saved_answer.q_option;
               saved_ans[question.qid] = saved_answer.q_option;
               // break;
-            }
-          });
-          break;
-
-        case 'Match the Column':
-          saved_answers.forEach(function (saved_answer, svk, array) {
-            if (question.qid == saved_answer.qid) {
-              if (!saved_ans[question.qid]) { saved_ans[question.qid] = [] }
-              saved_ans[question.qid].push(saved_answer.q_option);
-            }
-          });
-          break;
-
-        case 'Cloze Test':
-          saved_answers.forEach(function (saved_answer, svk, array) {
-            if (question.qid == saved_answer.qid) {
-              if (!saved_ans[question.qid]) { saved_ans[question.qid] = [] }
-              saved_ans[question.qid].push(saved_answer.q_option);
             }
           });
           break;

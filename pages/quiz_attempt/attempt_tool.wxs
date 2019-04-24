@@ -91,19 +91,22 @@ var matchRight = function(arr){
 }
 
 var str_in_array = function(str, sav, mop){
-  //返回index
+  //返回index str:左匹配项 sav[]:保存的答案 mop[]:右匹配项
   var res = false
   var r = ''
-  for(var i=0;i<sav.length;i++){
-    if(sav[i].indexOf(str) != -1){
-      res = true
-      r = sav[i]
-      break;
+  if(sav.length){
+    for (var i = 0; i < sav.length; i++) {
+      if (sav[i].indexOf(str) != -1) {
+        res = true
+        r = sav[i]  //作答情况
+        break;
+      }
     }
   }
+
   if(res){  //在已保存的答案里，找出在match_option中的索引
     for(var j=0; j<mop.length; j++){
-      if(r.indexOf(mop[j]) != -1){ return j }
+      if(r.indexOf(mop[j]) != -1){ return parseInt(j) }
     }
   }else{
     return 0;

@@ -17,9 +17,27 @@
         <view>Rank</view>
         <view class='resultDetailVal'>{{result.rank}}</view>
       </view>
+      
+        <wxs module='tool'>
+          var leadingZero = function(time) {
+            return(time < 10) ?"0" + time : + time;
+          }
+          var updateTimer = function(seconds){
+            var Days = Math.floor(seconds / 86400);
+            seconds -= Days * 86400;
+            var Hours = Math.floor(seconds / 3600);
+            seconds -= Hours * (3600);
+            var Minutes = Math.floor(seconds / 60);
+            seconds -= Minutes * (60);
+            var TimeStr = ((Days > 0) ? Days + " days " : "") + leadingZero(Hours) + ":" + leadingZero(Minutes) + ":" + leadingZero(seconds)
+            return TimeStr;
+        }
+          module.exports = { updateTimer:updateTimer }
+        </wxs>
+
       <view class='resultDetailBox'>
         <view>Time_spent</view>
-        <view class='resultDetailVal'>{{result.result.total_time}}</view>
+        <view class='resultDetailVal'>{{tool.updateTimer(result.result.total_time)}}</view>
       </view>
       <view class='resultDetailBox'>
         <view>Attempt_time</view>

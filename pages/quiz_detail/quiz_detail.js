@@ -27,6 +27,7 @@ Page({
       method:'GET',
       header:header,
       success:res =>{
+        console.log(`quiz_detail.js中 startQuiz返回的数据：：：`)
         console.log(res)
         if (res && res.header && res.header['Set-Cookie']) {
           wx.setStorageSync('cookieKey', res.header['Set-Cookie']);   //保存Cookie到Storage

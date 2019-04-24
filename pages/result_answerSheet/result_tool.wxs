@@ -1,0 +1,32 @@
+var indScoreNum = function(s){
+  //根据ind_score的标记 判断返回的颜色下标
+  var str = s+''; //0 1 2 3 4-..
+  var num = +(str[0]);
+  return num;
+}
+
+var split = function(arr){
+  return arr.split(',')
+}
+
+
+var m2 = function (arr) {
+  var a = [];
+  for (var i = 0; i < arr.length; i++) {
+    a.push(arr[i].split('___')[1]);
+  }
+  return a;
+}
+
+var getStrByIndex = function(index,str){
+  var a = str.split(',')
+  return a[+index]
+}
+
+
+  module.exports = {
+    indScoreNum: indScoreNum,
+    split : split,
+    m2 : m2,
+    getStrByIndex: getStrByIndex
+  }

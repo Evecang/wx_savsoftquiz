@@ -27,7 +27,7 @@
   font-weight: 900;
 }
 .timer{
-  background-color: #000;
+  /* background-color: #000; */
 }
 
 .question_form{
@@ -60,19 +60,37 @@
 .op{
   display: grid;
   grid-template-columns: 10% 90%;
+  margin-bottom: 5rpx;
 }
 
 .shortInput{
   border: 1rpx solid #000;
+  width: 99%;
 }
 
 .longInput{
   border: 1rpx solid #000;
+  width: 99%;
+  /* height: 90%; */
 }
 
 .picker{
   display: inline;
   border: 1rpx solid #000;
+  position: relative;
+}
+/* .picker::after{
+  position: absolute;
+  right: 6rpx;
+  top: 5rpx;
+  contain: ''
+} */
+
+.match_select{
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 50% 50%;
+  margin-bottom: 10rpx;
 }
 
 .footerBtnsArea{

@@ -2,7 +2,8 @@
 @import "../../icons/result_answer_sheet.wxss";
 
 .container{
-  padding:50rpx;
+  padding:10rpx;
+  margin:0;
   justify-content: flex-start;
   overflow: scroll;
 }
@@ -11,7 +12,7 @@
   display: grid;
   grid-template-columns: 20% 80%;
   width: 100%;
-  margin-top:30rpx;
+  margin-bottom:30rpx;
   color: #fff
 }
 
@@ -50,4 +51,9 @@
 .matchColumnGrid{
   display: grid;
   grid-template-columns: 15% 20% auto auto;
+}
+
+.clozeColumnGrid{
+  display: grid;
+  grid-template-columns: 15% auto auto;
 }

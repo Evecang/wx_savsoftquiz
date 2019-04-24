@@ -1,8 +1,8 @@
 <!--pages/result_answerSheet/answer_sheet.wxml-->
 <view class='container'>
-
+  <wxs src='./result_tool.wxs' module='tool'/>
   <block wx:for="{{result.questions}}" wx:for-item="question" wx:for-index="qk" wx:key="{{question.qid}}">
-    <view class='answerBox' style="background-color:{{answerBoxColor[ind_score[qk]-1]}}">
+    <view class='answerBox' style="background-color:{{answerBoxColor[ ind_score[qk] ]}}; color:{{answerFontColor[ ind_score[qk] ]}}">
       <view class='answerOlder'>
         <view class='qusCircle'>
           <text>{{qk+1}}</text>
@@ -93,11 +93,6 @@
             </block>
           </view>
 
-          <view wx:if="{{question['description'] != ''}}">
-            <text>Description: </text>
-            <text>{{question['description']}}</text>
-          </view>
-
         </block>
 
         <!-- 匹配题 -->
@@ -106,22 +101,10 @@
           <view class='matchColumnGrid'>
           <text></text>
           <text></text>
-          <text>YourAnswer</text>
-          <text>CorrectAnswer</text>
+          <text style='text-align:center'>YourAns</text>
+          <text style='text-align:center'>CorrectAns</text>
           </view>
-          <wxs module='tool'>
-            var m2 = function(arr){
-              var a = [];
-              for(var i=0;i<arr.length;i++){
-                a.push(arr[i].split('___')[1]);
-              }
-              return a;
-            }
-            
-            module.exports = {
-              m2:m2
-            }
-          </wxs>
+
           <block wx:for='{{options_qid[question.qid]}}' wx:for-index='ok'wx:for-item='option' wx:key="ok">
             <view class='matchColumnGrid'>
             <text>{{adc[ok]}}) </text>
@@ -131,12 +114,36 @@
             </view>
           </block>
 
-          <view wx:if="{{question['description'] != ''}}">
-            <text>Description: </text>
-            <text>{{question['description']}}</text>
+        </block>
+
+        <!-- 完形填空 -->
+        <block wx:elif="{{question['question_type']=='Cloze Test'}}">
+
+          <view class='clozeColumnGrid'>
+          <text></text>
+          <text style='text-align:center'>YourAns</text>
+          <text style='text-align:center'>CorrectAns</text>
           </view>
 
+          <block wx:for='{{options_qid[question.qid]}}' wx:for-index='ok'wx:for-item='option' wx:key="ok">
+            <view class='clozeColumnGrid'>
+              <text>{{ok+1}}) </text>
+              <text style='text-align:center'>{{tool.m2(saved_ans[question.qid])[ok] }}</text>
+              <text style='text-align:center'>{{tool.getStrByIndex(option.q_option_match, option.q_option_match_option) }}</text>
+            </view>
+          </block>
+
         </block>
+
+        <view wx:if="{{question['description'] != ''}}">
+          <text>Description: </text>
+          <text>{{question['description']}}</text>
+        </view>
+        
+        <view wx:if="{{question['analyses'] != ''}}">
+          <text>Analyses: </text>
+          <text>{{question['analyses']}}</text>
+        </view>
 
       </view>
     </view>

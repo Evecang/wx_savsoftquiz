@@ -1,8 +1,8 @@
 <!--pages/quiz_attempt/quiz_attempt.wxml-->
 <view class='container'>
   <view class='header'>
-    <text class='title'>Quiz Name</text>
-    <view class='timer'>time</view>
+    <text class='title'>{{quiz.quiz_name}}</text>
+    <view class='timer'>{{timeStr}}</view>
   </view><!--end of header-->
 
   <form bindsubmit='save_answer' class='question_form'>
@@ -24,7 +24,7 @@
               <input name="question_type[{{qk}}]"  id="q_type{{qk}}" value="1" style='display:none'/>
               <radio-group name='answer[{{qk}}][]'>
                 <view class='op' wx:for='{{options_qid[question.qid]}}' wx:for-index='ok' wx:for-item='option' wx:key='oid' >
-                  <text>{{abc[ok]}}</text>
+                  <text>{{abc[ok]}} )</text>
                   <radio value='{{option.oid}}' checked='{{ tool.in_array( option.oid,saved_ans[question.qid] ) }}'>
                   {{option.q_option}}
                   </radio>
@@ -36,7 +36,7 @@
               <input name="question_type[{{qk}}]"  id="q_type{{qk}}" value="2" style='display:none'/>
               <checkbox-group name='answer[{{qk}}][]'>
                 <view class='op' wx:for='{{options_qid[question.qid]}}' wx:for-index='ok' wx:for-item='option' wx:key='oid' >
-                {{abc[ok]}}
+                  <text>{{abc[ok]}} )</text>
                   <checkbox  value='{{option.oid}}' checked='{{tool.in_array(option.oid, saved_ans[question.qid] )}}'>{{option.q_option}}</checkbox>
                 </view>
               </checkbox-group>
@@ -44,27 +44,46 @@
 
             <view wx:elif='{{question.question_type=="Short Answer"}}'>
               <input  name="question_type[{{qk}}]"  id="q_type{{qk}}" value="3" style='display:none'/>
-              <view class='op'>
-                <view><text>Answer</text></view>
+              <view>Answer</view>
+              <view class='op' style='grid-template-columns: 100%;'>
                 <input class='shortInput' type='text' name='answer[{{qk}}][]' value='{{saved_ans[question.qid]}}'/>
               </view>
             </view><!--end of short answer-->
 
             <view wx:elif='{{question.question_type=="Long Answer"}}'>
               <input  name="question_type[{{qk}}]" id="q_type{{qk}}" value="4" style='display:none'/>
-              <view class='op'>
-                <view><text>Answer</text></view>
-                <input class='longInput' type='text' name='answer[{{qk}}][]' value='{{saved_ans[question.qid]}}'/>
+              <view>Answer</view>
+              <view style='display:flex;justify-content: space-evenly;'>
+                <textarea class='longInput' name='answer[{{qk}}][]' value='{{saved_ans[question.qid]}}' maxlength='-1' />
               </view>
             </view><!--end of long answer-->
 
-            <view wx:elif='{{question.question_type=="Match the Column"}}'>
+            <!-- <view wx:elif='{{question.question_type=="Match the Column"}}'>
               <input  name="question_type[{{qk}}]" id="q_type{{qk}}" value="5" style='display:none'/>
               <block wx:for='{{options_qid[question.qid]}}' wx:for-index='ok' wx:for-item='option' wx:key='oid' wx:key='{{oid}}'>
-                <view  class='op'>
+                <view class='op'  style='grid-template-columns: 10% 45% 45%; margin-bottom: 10rpx;'>
+                  <text>{{ok+1}})</text>
                   <text>{{option.q_option}}</text>
-                  <picker name='answer[{{qk}}][]' value='{{tool.str_in_array(option.q_option, saved_ans[question.qid], match_option[question.qid] )}}' range='{{match_option[question.qid]}}' class='picker'>{{match_option[question.qid][ tool.str_in_array(option.q_option, saved_ans[question.qid], match_option[question.qid] ) ] }}</picker>
+                  <picker name='answer[{{qk}}][{{ok}}]' value='{{tool.str_in_array(option.q_option, saved_ans[question.qid], match_option[question.qid] )}}' range='{{match_option[question.qid]}}' class='picker'>
+                    <text>{{match_option[question.qid][ tool.str_in_array(option.q_option, saved_ans[question.qid], match_option[question.qid] ) ] }}</text>
+                  </picker>
                 </view>
+              </block>
+            </view>end of match -->
+            
+            <view wx:elif='{{question.question_type=="Match the Column"}}'>
+              <input  name="question_type[{{qk}}]" id="q_type{{qk}}" value="5" style='display:none'/>
+              <block wx:for='{{options_qid[question.qid]}}' wx:for-index='ok' wx:for-item='option' wx:key='oid'>
+                <text>{{ok+1}} ) </text>
+                <text>{{option.q_option}}</text>
+                <radio-group name='answer[{{qk}}][{{ok}}]'  class='match_select'>
+                  <view wx:for='{{ match_option[question.qid] }}' wx:for-index='mk' wx:for-item='m_option' wx:key='*this'>
+                    <radio value='{{option.q_option+"___"+m_option}}' checked='{{ tool.in_array( option.q_option+"___"+m_option , saved_ans[question.qid] ) }}'>
+                      {{m_option}}
+                    </radio>
+                  </view>
+                </radio-group>
+
               </block>
             </view><!--end of match-->
 
@@ -72,10 +91,11 @@
               <input  name="question_type[{{qk}}]" id="q_type{{qk}}" value="6" style='display:none'/>
               <block wx:for='{{options_qid[question.qid]}}' wx:for-index='ok' wx:for-item='option' wx:key='oid'  >
                 {{option.q_option}} )
-                <radio-group name='answer[{{qk}}][option.q_option]'>
+                <radio-group name='answer[{{qk}}][{{option.q_option}}]' style='margin-bottom:10rpx;'>
                   <view class='op' wx:for='{{ tool.split(option.q_option_match_option) }}' wx:for-index='ck' wx:for-item='c_option' wx:key='*this' >
+                    <text style='padding-left:10rpx;'>{{abc[ck]}} ) </text>
                     <radio value='{{option.q_option+"___"+c_option}}' checked='{{ tool.in_array( option.q_option+"___"+c_option , saved_ans[question.qid] ) }}'>
-                      c_option
+                      {{c_option}}
                     </radio>
                   </view>
               </radio-group>
