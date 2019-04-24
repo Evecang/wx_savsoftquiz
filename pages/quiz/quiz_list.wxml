@@ -8,7 +8,7 @@
     </form>
   </view>
 
-  <view class='row'>
+  <view class='row' style='width:100%'>
     <block wx:for='{{result}}' wx:key="{{result.quid}}">
       <view class='grid'>
         <view class='gridBox'>

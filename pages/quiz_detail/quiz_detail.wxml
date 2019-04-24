@@ -53,7 +53,7 @@
 
 
     <view class='btnBox'>
-      <button bindtap='startQuiz'>Start Quiz</button>
+      <button bindtap='startQuiz' loading='{{loading}}'>Start Quiz</button>
       <button bindtap='back'>Back</button>
     </view>
 

@@ -6,10 +6,17 @@ Page({
    * 页面的初始数据
    */
   data: {
-    quizDetail: {}
+    quizDetail: {},
+    loading:false
   },
   startQuiz(e){
+    this.setData({loading:true})
+    wx.showLoading({
+      title: '正在初始化试卷',
+      mask:true
+    })
     let cookie = wx.getStorageSync('cookieKey');//取出Cookie
+    console.log(cookie)
     let header = {};
     if (cookie) {
       header.Cookie = cookie;
@@ -24,6 +31,7 @@ Page({
         if (res && res.header && res.header['Set-Cookie']) {
           wx.setStorageSync('cookieKey', res.header['Set-Cookie']);   //保存Cookie到Storage
         }
+        wx.hideLoading()
         let result = res.data
         switch(result.code){  //0-login 1-attempt 2-resume 3-detail
           case 0:
@@ -39,18 +47,24 @@ Page({
             })
             break;
           case 1:
+            this.setData({ loading: false })
             wx.navigateTo({
               url: '../' + result.url,
             })
             break;
           case 2:
+            this.setData({ loading: false })
             wx.showModal({
               title: '提示',
               content: result.message,
               success: r=>{
-                wx.navigateTo({
-                  url: '../' + result.url
-                })
+                if(r.confirm){
+                  wx.navigateTo({
+                    url: '../' + result.url
+                  })
+                }else if(r.cancel){
+                  
+                }
               }
             })
             break;
@@ -125,6 +139,9 @@ Page({
       method: 'GET',
       success: res => {
         console.log(res)
+        if (res && res.header && res.header['Set-Cookie']) {
+          wx.setStorageSync('cookieKey', res.header['Set-Cookie']);   //保存Cookie到Storage
+        }
         res.data.start_date = this.getMyDate(res.data.start_date);
         res.data.end_date = this.getMyDate(res.data.end_date);
         wx.setStorage({

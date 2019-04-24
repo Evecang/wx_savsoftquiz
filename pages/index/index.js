@@ -72,7 +72,7 @@ Page({
             fail:res =>{
               wx.showModal({
                 title: '错误',
-                content: '请求，请查看网络',
+                content: '请求失败，请查看网络',
                 showCancel: false
               })
             }

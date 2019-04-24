@@ -1,8 +1,106 @@
 <!--pages/quiz_attempt/quiz_attempt.wxml-->
 <view class='container'>
+  <view class='header'>
+    <text class='title'>Quiz Name</text>
+    <view class='timer'>time</view>
+  </view><!--end of header-->
 
+  <form bindsubmit='save_answer' class='question_form'>
+    <input name="rid" value="{{quiz.rid}}" style='display:none'/>
+    <input name="noq" value="{{quiz.noq}}" style='display:none' />
+    <input name="individual_time"  value="{{quiz.individual_time}}" style='display:none'/>
+    <block wx:for='{{questions}}' wx:for-index='qk' wx:for-item='question' wx:key='{{qid}}'>
+
+      <view id="q{{qk}}" class='{{ qk==qn ? "show_question" : "hidden_question" }}'>
+          <view class='question_container'>
+            <view><text>Question {{qk+1}})</text></view>
+            <text>{{question.question}}</text>
+          </view><!--end of question_container-->
+
+          <view class='option_container'>
+            <wxs src='./attempt_tool.wxs' module='tool'/>
+
+            <view wx:if='{{question.question_type=="Multiple Choice Single Answer"}}'>
+              <input name="question_type[{{qk}}]"  id="q_type{{qk}}" value="1" style='display:none'/>
+              <radio-group name='answer[{{qk}}][]'>
+                <view class='op' wx:for='{{options_qid[question.qid]}}' wx:for-index='ok' wx:for-item='option' wx:key='oid' >
+                  <text>{{abc[ok]}}</text>
+                  <radio value='{{option.oid}}' checked='{{ tool.in_array( option.oid,saved_ans[question.qid] ) }}'>
+                  {{option.q_option}}
+                  </radio>
+                </view>
+              </radio-group>
+            </view><!--end of 单选-->
+
+            <view wx:elif='{{question.question_type=="Multiple Choice Multiple Answer"}}'>
+              <input name="question_type[{{qk}}]"  id="q_type{{qk}}" value="2" style='display:none'/>
+              <checkbox-group name='answer[{{qk}}][]'>
+                <view class='op' wx:for='{{options_qid[question.qid]}}' wx:for-index='ok' wx:for-item='option' wx:key='oid' >
+                {{abc[ok]}}
+                  <checkbox  value='{{option.oid}}' checked='{{tool.in_array(option.oid, saved_ans[question.qid] )}}'>{{option.q_option}}</checkbox>
+                </view>
+              </checkbox-group>
+            </view><!--end of 多选-->
+
+            <view wx:elif='{{question.question_type=="Short Answer"}}'>
+              <input  name="question_type[{{qk}}]"  id="q_type{{qk}}" value="3" style='display:none'/>
+              <view class='op'>
+                <view><text>Answer</text></view>
+                <input class='shortInput' type='text' name='answer[{{qk}}][]' value='{{saved_ans[question.qid]}}'/>
+              </view>
+            </view><!--end of short answer-->
+
+            <view wx:elif='{{question.question_type=="Long Answer"}}'>
+              <input  name="question_type[{{qk}}]" id="q_type{{qk}}" value="4" style='display:none'/>
+              <view class='op'>
+                <view><text>Answer</text></view>
+                <input class='longInput' type='text' name='answer[{{qk}}][]' value='{{saved_ans[question.qid]}}'/>
+              </view>
+            </view><!--end of long answer-->
+
+            <view wx:elif='{{question.question_type=="Match the Column"}}'>
+              <input  name="question_type[{{qk}}]" id="q_type{{qk}}" value="5" style='display:none'/>
+              <block wx:for='{{options_qid[question.qid]}}' wx:for-index='ok' wx:for-item='option' wx:key='oid' wx:key='{{oid}}'>
+                <view  class='op'>
+                  <text>{{option.q_option}}</text>
+                  <picker name='answer[{{qk}}][]' value='{{tool.str_in_array(option.q_option, saved_ans[question.qid], match_option[question.qid] )}}' range='{{match_option[question.qid]}}' class='picker'>{{match_option[question.qid][ tool.str_in_array(option.q_option, saved_ans[question.qid], match_option[question.qid] ) ] }}</picker>
+                </view>
+              </block>
+            </view><!--end of match-->
+
+            <view wx:else='{{question.question_type=="Cloze Test"}}'>
+              <input  name="question_type[{{qk}}]" id="q_type{{qk}}" value="6" style='display:none'/>
+              <block wx:for='{{options_qid[question.qid]}}' wx:for-index='ok' wx:for-item='option' wx:key='oid'  >
+                {{option.q_option}} )
+                <radio-group name='answer[{{qk}}][option.q_option]'>
+                  <view class='op' wx:for='{{ tool.split(option.q_option_match_option) }}' wx:for-index='ck' wx:for-item='c_option' wx:key='*this' >
+                    <radio value='{{option.q_option+"___"+c_option}}' checked='{{ tool.in_array( option.q_option+"___"+c_option , saved_ans[question.qid] ) }}'>
+                      c_option
+                    </radio>
+                  </view>
+              </radio-group>
+              </block>
+            </view><!--end of cloze-->
+          </view><!--end of option_container-->
+
+      
+      </view><!--end of question_div-->
+ 
+    </block><!--end of questions(for)-->
+
+    <!-- <view class='qbtn'>
+    </view> -->
+    <!--end of qbtn-->
+
+    <view class='footerBtnsArea'>
+      <!-- <button class='btn-info'>Clear</button> -->
+      <button form-type='submit' bindtap='show_back_question' wx:if='{{back}}' class='btn-info'>Back</button>
+      <button form-type='submit' bindtap='show_next_question'  wx:if='{{next}}' class='btn-success'>Save&Next</button>
+      <button form-type='submit' bindtap='submit_quiz' class='btn-danger'>Submit</button>
+    </view>
+
+  </form>
 
 
 </view>
 
-<view class='footerBtnsArea'></view>

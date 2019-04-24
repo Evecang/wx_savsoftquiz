@@ -1,0 +1,125 @@
+var savedAns = function (saved_answers, question){
+  switch (question.question_type){
+    case 'Multiple Choice Single Answer':
+
+    case 'Multiple Choice Multiple Answer':
+      var saved_ans = [];
+      saved_answers.forEach(function (saved_answer, svk, array) {
+        if (question.qid == saved_answer.qid) {
+          saved_ans.push(saved_answer.q_option);
+        }
+      });
+
+      break;
+    case 'Short Answer':
+
+    case 'Long Answer':
+      var saved_ans = '';
+      saved_answers.forEach(function (saved_answer, svk, array) {
+        if (question.qid == saved_answer.qid) {
+          saved_ans=saved_answer.q_option;
+          // break;
+        }
+      });
+
+      break;
+    case 'Match the Column':
+      var saved_ans = [];
+      saved_answers.forEach(function (saved_answer, svk, array) {
+        if (question.qid == saved_answer.qid) {
+          saved_ans.push(saved_answer.q_option);
+        }
+      });
+      break;
+
+    case 'Cloze Test':
+      var saved_ans = [];
+      saved_answers.forEach(function (saved_answer, svk, array) {
+        if (question.qid == saved_answer.qid) {
+          saved_ans.push(saved_answer.q_option);
+        }
+      });
+
+      break;
+  }
+  return saved_ans;
+}
+
+var in_array = function (val, arr){
+  for(var i=0;i<arr.length;i++){
+    if(arr[i]==val){
+      return true;
+    }
+  }
+  return false;
+}
+
+var match = function(options,qid){
+  var left = []; var right = [];
+  options.forEach(function(option, ok, arr){
+    if(option.qid==qid){
+      left.push(option.q_option);
+      right.push(option.q_option_match);
+    }
+  })
+  var arr = [];
+  arr['left'] = left;
+  arr['right'] = right;
+  return arr;
+}
+
+var shuffle = function(arr) {
+  var length = arr.length,
+    randomIndex,
+    temp;
+  while (length) {
+    randomIndex = Math.floor(Math.random() * (length--));
+    temp = arr[randomIndex];
+    arr[randomIndex] = arr[length];
+    arr[length] = temp
+  }
+  return arr;
+}
+
+var matchRight = function(arr){
+  var len = arr.length
+  var m2 = []
+  for(var i=0; i<len; i++){
+    m2.push(arr.q_option_match)
+  }
+  return m2
+}
+
+var str_in_array = function(str, sav, mop){
+  //返回index
+  var res = false
+  var r = ''
+  for(var i=0;i<sav.length;i++){
+    if(sav[i].indexOf(str) != -1){
+      res = true
+      r = sav[i]
+      break;
+    }
+  }
+  if(res){  //在已保存的答案里，找出在match_option中的索引
+    for(var j=0; j<mop.length; j++){
+      if(r.indexOf(mop[j]) != -1){ return j }
+    }
+  }else{
+    return 0;
+  }
+}
+
+var split = function(arr){
+  return arr.split(',');
+}
+
+module.exports = {
+  savedAns: savedAns,
+  in_array: in_array,
+  match: match,
+  shuffle: shuffle,
+  matchRight : matchRight,
+  str_in_array: str_in_array,
+  split: split
+};
