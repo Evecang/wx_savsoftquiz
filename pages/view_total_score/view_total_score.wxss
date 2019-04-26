@@ -1,4 +1,5 @@
 /* pages/view_total_score/view_total_score.wxss */
+@import '../../icons/bg.wxss';
 
 .container {
   height: 100%;
@@ -32,6 +33,7 @@
   /* min-width: 250rpx; */
   height: 58rpx;
   line-height: 58rpx;
+  font-size: 30rpx;
   border: #aaa 1rpx solid;
   border-top-left-radius: 10rpx;
   border-bottom-left-radius: 10rpx;
@@ -44,9 +46,9 @@ button::after {
 }
 .perBtn{
   float:left;
-  width: 30s0rpx;
-  height: 63rpx;
-  line-height: 63rpx;
+  width: 300rpx;
+  height: 61rpx;
+  line-height: 61rpx;
   font-size: 30rpx;
   border-radius: 0;
   border: #aaa 1rpx solid;
@@ -105,6 +107,7 @@ button::after {
   align-items: center;
   flex-wrap: wrap;
   font-size: 31rpx;
+  /* background-color: transparent; */
   overflow: scroll;
 }
 

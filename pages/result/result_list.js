@@ -100,6 +100,31 @@ Page({
    */
   onShow: function () {
 
+    let cookie = wx.getStorageSync('cookieKey')
+    let header = { 'Content-type': 'application/json' }
+    if (cookie) {
+      header.Cookie = cookie;
+    }
+    let that = this
+    wx.request({
+      url: URL + 'result/wx_index/',
+      method: 'POST',
+      header: header,
+      success(res) {
+        console.log(res)
+        if (res && res.header && res.header['Set-Cookie']) {
+          wx.setStorageSync('cookieKey', res.header['Set-Cookie']);   //保存Cookie到Storage
+        }
+        that.setData({
+          result: res.data.result,
+          quiz_list: res.data.quiz_list
+        })
+
+      },
+      fail(res) {
+        console.log('初始化考试结果列表失败')
+      }
+    })
   },
 
   /**

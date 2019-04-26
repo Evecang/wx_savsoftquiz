@@ -1,5 +1,5 @@
 <!--pages/view_total_score/view_total_score.wxml-->
-<view class='container'>
+<view class='container pageBg'>
   <view class="titile">{{group_name}} 平时成绩统计表</view>
   <view class="row">
     <!-- 搜索表单 -->
