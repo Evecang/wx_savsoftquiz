@@ -127,10 +127,10 @@ Page({
               data: res.data.data
             })
             // console.log(res.data.data) //实际上仅 需要 data.group_list 和 data.quiz
-            //跳转页面
-            // wx.navigateTo({
-            //   url: '../quiz_edit/quiz_edit?quid=' + quid,
-            // })
+            // 跳转页面
+            wx.navigateTo({
+              url: '../quiz_edit/quiz_edit?quid=' + quid,
+            })
             
             break;
           case 2:
@@ -264,7 +264,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.search()
   },
 
   /**

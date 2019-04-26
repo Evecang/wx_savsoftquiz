@@ -1,0 +1,17 @@
+var in_array = function(str, strArr){
+  var arr = strArr.split(',')
+  // for(var i=0;i<arr.length;i++){
+  //   if(str==arr[i]){
+  //     return true;
+  //   }
+  // }
+  // return false;
+  if(arr.indexOf(str)!=-1){
+    return true
+  }
+  return false
+}
+
+module.exports = {
+  in_array: in_array
+};

@@ -1,2 +1,55 @@
 <!--pages/quiz_edit/quiz_edit.wxml-->
-<text>pages/quiz_edit/quiz_edit.wxml</text>
+<view class="container pinkBg">
+  <text class="title">Edit Quiz</text>
+  <view style='height:100%;width:90%;'>
+
+    <form bindsubmit='update' class="edit_form">
+      <view class="form_group">
+        <text>Quiz Name</text>
+        <input name="quiz_name" class="Input" value='{{quiz.quiz_name}}' />
+      </view>
+
+      <view class="form_group">
+        <text>Start Date</text>
+        <input name="start_date" class="Input" value='{{quiz.start_date}}' />
+      </view>
+
+      <view class="form_group">
+        <text>End Date</text>
+        <input name="end_date" class="Input" value='{{quiz.end_date}}' />
+      </view>
+
+      <view class="form_group">
+        <text>Duration (in min.)</text>
+        <input name="duration" class="Input" value='{{quiz.duration}}' />
+      </view>
+
+      <view class="form_group">
+        <text>Allow Maximum Attempts</text>
+        <input name="maximum_attempts" class="Input" value='{{quiz.maximum_attempts}}' />
+      </view>
+      
+      <view class="form_group">
+        <text>Minimum Percentage</text><text>Required to Pass</text>
+        <input name="pass_percentage" class="Input" value='{{quiz.pass_percentage}}' />
+      </view>
+      
+      <view class="form_group">
+        <text>Select Group</text>
+        <checkbox-group name="gids">
+          <wxs src='./quiz_edit_tool.wxs' module='tool'/>
+          <label class="checkbox"  wx:for="{{group_list}}" wx:key="gid" >
+            <checkbox value="{{item.gid}}" checked='{{tool.in_array(item.gid, quiz.gids)}}'/>{{item.group_name}}
+          </label>
+        </checkbox-group>
+      </view>
+
+      <view class='btnBox'>
+        <button bindtap='back'>Back</button>
+        <button loading='{{loading}}' form-type='submit'>Submit</button>
+      </view>
+
+    </form>
+
+  </view>
+</view>
