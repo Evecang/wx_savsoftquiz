@@ -1,0 +1,52 @@
+<!--pages/view_total_score/view_total_score.wxml-->
+<view class='container'>
+  <view class="titile">{{group_name}} 平时成绩统计表</view>
+  <view class="row">
+    <!-- 搜索表单 -->
+    <form bindsubmit='search'>
+        <input type="text" class="perInput" name="per" placeholder=" 若占30%输入30即可.."/>
+        <button class='perBtn' form-type="submit">更改平时成绩占比</button>
+    </form>
+  </view>
+
+  <scroll-view scroll-x="true" class="scrollClass">
+    <view class='table'>
+
+      <view class='tr'>
+          <view class="th">排名</view>
+          <view class="th">姓名</view>
+          <view class="th"><text>参与测试</text><text>次数</text></view>
+          <view class="th">总分</view>
+          <view class="th">平时成绩</view>
+          <view class="th">占比折算</view>
+      </view>
+
+      <block wx:if="{{grades_average.length}}">
+        <block wx:for="{{grades_average}}" wx:key="uid">
+          <wxs module='tool'>
+            var round = function(num, n){
+              return num.toFixed(n);
+            }
+            module.exports = {
+              round : round
+            }
+          </wxs>
+          <view class='tr'>
+            <view class="td">{{index+1}}</view>
+            <view class="td">{{item.user_name}}</view>
+            <view class="td">{{item.attempt_number}}</view>
+            <view class="td">{{item.total_score}}</view>
+            <view class="td">{{ tool.round(item.average_score) }}</view>
+            <view class="td">{{ tool.round(item.average_score*per/100,4) }}</view>
+          </view>
+        </block>
+      </block>
+
+      <block wx:else>
+        <view class='no_data'>暂无数据</view>
+      </block>
+
+    </view>
+  </scroll-view>
+
+</view>

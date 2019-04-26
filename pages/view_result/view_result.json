@@ -1,3 +1,7 @@
 {
-  "usingComponents": {}
+  "usingComponents": {},
+  "backgroundTextStyle": "light",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTitleText": "查看结果",
+  "navigationBarTextStyle": "black"
 }

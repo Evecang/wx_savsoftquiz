@@ -6,7 +6,9 @@
     "pages/view_result/view_result",
     "pages/quiz_detail/quiz_detail",
     "pages/quiz_attempt/quiz_attempt",
-    "pages/result_answerSheet/answer_sheet"
+    "pages/result_answerSheet/answer_sheet",
+    "pages/quiz_edit/quiz_edit",
+    "pages/view_total_score/view_total_score"
   ],
   "window": {
     "backgroundTextStyle": "light",

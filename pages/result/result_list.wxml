@@ -9,7 +9,14 @@
 
   </view> -->
 
+  <!--查看统计平时成绩-->
+  <view>
+    <button bindtap='viewTotalScore' class='viewTotalScoreBtn'>查看学期总成绩</button>
+  </view>
+
+
   <view class='row'>
+
     <block wx:if='{{result && result.length>0}}'>
       <block wx:for='{{result}}' wx:key="{{result.rid}}">
       <view class='grid' bindtap='quizResultDetail' data-rid='{{item.rid}}'>
@@ -20,30 +27,30 @@
             <text>{{item.quiz_name}}</text>
           </view>
 
+
           <view class='gridBody'>
             <view class='gridBodyList'>status： <text style="color:{{item.result_status=='Pass'?'green':item.result_status=='Fail'?'red':'yellow'}};display:inline-block">{{item.result_status}}</text></view>
             <view class='iconfont icon-icon_right gridBodyList'>Percentage: {{item.percentage_obtained}}%</view>
             <view class='gridBodyList'>Result ID: {{item.rid}}</view>
           </view>
 
+
           <view class='gridFooter'>
-
-
-            <!-- <button hover-class='button-hover' bindtap='quizDetail' data-quid='{{item.quid}}'>Attempt</button> -->
-
-<!-- TODO:这里管理员并不显示 -->
+<!-- TODO:这里管理员显示 -->
             <block wx:if='{{userData.su=="1"}}'>
-            <button bindtap='removeQuiz' ><image src='../../images/cross.png' style='width: 50rpx; height:50rpx;' mode='aspectFit'></image></button>
+            <button bindtap='removeQuiz' ><image src='../../images/cross.png' style='width: 50rpx; height:50rpx;' mode='aspectFit'></image></button><!--未实现-->
             </block>
-
           </view>
+
 
         </view>
       </view>
       </block>
     </block>
+
     <block wx:else>
         <text>没有考试结果！</text>
     </block>
-  </view>
-  </view>
+
+  </view><!--end of row-->
+  </view><!--end of container-->

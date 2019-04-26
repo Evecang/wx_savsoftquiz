@@ -22,6 +22,7 @@ Page({
     userData: app.globalData.userData
   },
   search(e){
+    var searchInfo = e ? e.detail.value.search : ''
     let cookie = wx.getStorageSync('cookieKey')
     let header = { 'Content-type': 'application/x-www-form-urlencoded' }
     if (cookie) {
@@ -33,7 +34,7 @@ Page({
       method: 'POST',
       header: header,
       data: {
-        search: e.detail.value.search
+        search: searchInfo
       },
       success(res) {
         console.log(res)
@@ -96,10 +97,124 @@ Page({
 
   },
   editQuiz(e){
-    console.log('edit')
+    console.log('edit') //quiz/wx_edit_quiz/ $quiz
+    var dataset = e.currentTarget.dataset
+    var quid = dataset.quid
+    let cookie = wx.getStorageSync('cookieKey')
+    let header = {}
+    if (cookie) {
+      header.Cookie = cookie;
+    }
+    var that = this
+    wx.request({
+      url: URL + 'quiz/wx_edit_quiz/' + quid,
+      header: header,
+      method: 'GET',
+      success: res =>{
+        console.log(res)
+        if (res && res.header && res.header['Set-Cookie']) {
+          wx.setStorageSync('cookieKey', res.header['Set-Cookie']);   //保存Cookie到Storage
+        }
+        switch (res.data.code) {
+          case 0:
+            wx.switchTab({
+              url: '../index/index',
+            })
+            break;
+          case 1:
+            wx.setStorage({
+              key: 'quizEdit',
+              data: res.data.data
+            })
+            // console.log(res.data.data) //实际上仅 需要 data.group_list 和 data.quiz
+            //跳转页面
+            // wx.navigateTo({
+            //   url: '../quiz_edit/quiz_edit?quid=' + quid,
+            // })
+            
+            break;
+          case 2:
+            wx.showToast({
+              title: res.data.message,
+              icon: 'none',
+              duration: 1500
+            })
+            break;
+        }
+
+      },
+      fail: res => {
+        wx.showModal({
+          title: '错误',
+          content: '请求失败，请查看网络',
+          showCancel: false
+        })
+      }
+
+    })
+
   },
   removeQuiz(e){
     console.log('remove')
+    var dataset = e.currentTarget.dataset
+    var quid = dataset.quid
+    let cookie = wx.getStorageSync('cookieKey')
+    let header = {}
+    if (cookie) {
+      header.Cookie = cookie;
+    }
+    var that = this
+    wx.showModal({
+      title: '提示',
+      content: 'Do you really want to remove entry?',
+      success:r =>{
+        if(r.confirm){
+
+          wx.request({
+            url: URL + 'quiz/wx_remove_quiz/' + quid,
+            header: header,
+            method: 'GET',
+            success: res => {
+              console.log(res)
+              if (res && res.header && res.header['Set-Cookie']) {
+                wx.setStorageSync('cookieKey', res.header['Set-Cookie']);   //保存Cookie到Storage
+              }
+              switch(res.data.code){
+                case 0:
+                  wx.switchTab({
+                    url: '../index/index',
+                  })
+                  break;
+                case 1:
+                  wx.showToast({
+                    title: res.data.message,
+                    duration:1500
+                  })
+                  //刷新页面
+                  that.search()
+                  break;
+                case 2:
+                  wx.showToast({
+                    title: res.data.message,
+                    icon: 'none',
+                    duration: 1500
+                  })
+                  break;
+              }
+
+            },
+            fail: res => {
+              wx.showModal({
+                title: '错误',
+                content: '请求失败，请查看网络',
+                showCancel: false
+              })
+            }
+          })
+
+        }
+      }
+    })
   },
 
   /**

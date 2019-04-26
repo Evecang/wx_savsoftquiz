@@ -45,6 +45,10 @@ button::after {
   border-top-right-radius: 10rpx;
   border-bottom-right-radius: 10rpx;
 }
+.viewTotalScoreBtn{
+  background-color: #5bc0de;
+  color: #fff;
+}
 
 /* .row .grid:nth-last-child(1){
   align-items: flex-start; 

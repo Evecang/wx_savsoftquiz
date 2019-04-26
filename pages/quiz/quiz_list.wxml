@@ -25,8 +25,8 @@
             <button hover-class='button-hover' bindtap='quizDetail' data-quid='{{item.quid}}'>Attempt</button>
 
             <block wx:if='{{userData.su=="1"}}'>
-            <button bindtap='editQuiz' ><image src='../../images/edit.png' style='width: 50rpx; height:50rpx;' mode='aspectFit'></image></button>
-            <button bindtap='removeQuiz' ><image src='../../images/delete.png' style='width: 50rpx; height:50rpx;' mode='aspectFit'></image></button>
+            <button bindtap='editQuiz'  data-quid='{{item.quid}}'><image src='../../images/edit.png' style='width: 50rpx; height:50rpx;' mode='aspectFit'></image></button>
+            <button bindtap='removeQuiz'  data-quid='{{item.quid}}'><image src='../../images/delete.png' style='width: 50rpx; height:50rpx;' mode='aspectFit'></image></button>
             </block>
 
           </view>

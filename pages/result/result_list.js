@@ -13,6 +13,39 @@ Page({
     userData: app.globalData.userData,
     bgColor: ['#dff0d8', '#fcf8e3', '#d9edf7', '#f2dcf2']
   },
+  viewTotalScore() {
+    let cookie = wx.getStorageSync('cookieKey')
+    let header = { 'Content-type': 'application/json' }
+    if (cookie) {
+      header.Cookie = cookie;
+    }
+    wx.request({
+      url: URL + 'result/wx_view_total_score',
+      method: 'POST',
+      header: header,
+      success(res) {
+        console.log(res)
+        if (res && res.header && res.header['Set-Cookie']) {
+          wx.setStorageSync('cookieKey', res.header['Set-Cookie']);   //保存Cookie到Storage
+        }
+        wx.setStorage({
+          key: 'groupsScore',
+          data: res.data.data
+        })
+        wx.navigateTo({
+          url: '../view_total_score/view_total_score',
+        })
+
+      },
+      fail(res) {
+        wx.showToast({
+          title: '请求失败，请查看网络',
+          icon:'none'
+        })
+      }
+    })
+    
+  },
 
   /**
    * 生命周期函数--监听页面加载
