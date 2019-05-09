@@ -1,4 +1,5 @@
 /* pages/quiz_attempt/quiz_attempt.wxss */
+/* @import "/wxParse/wxParse.wxss"; */
 .container{
   height: 100%;
   display: flex;

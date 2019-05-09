@@ -1,6 +1,6 @@
 <!-- pages/quiz/quiz_list.wxml -->
 <view class="container">
-  <view class="row">
+  <view class="row" wx:if="{{userData.su==1}}">
     <!-- 搜索表单 -->
     <form bindsubmit='search'>
         <input type="text" class="searchInput" name="search" placeholder=" Search.."/>

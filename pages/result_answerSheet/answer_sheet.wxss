@@ -6,6 +6,7 @@
   margin:0;
   justify-content: flex-start;
   overflow: scroll;
+  background-color: #e8e8e8;
 }
 
 .answerBox{
@@ -16,7 +17,7 @@
   color: #fff
 }
 
-.answerOlder{
+.answerOrder{
   display: flex;
   flex-direction: column;
   justify-content: center;

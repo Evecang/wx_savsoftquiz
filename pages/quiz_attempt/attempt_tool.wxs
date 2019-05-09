@@ -117,6 +117,12 @@ var split = function(arr){
   return arr.split(',');
 }
 
+// var allToString = function(a,b,c){
+//   var str = '';
+//   str += a + b + c;
+//   return str;
+// }
+
 module.exports = {
   savedAns: savedAns,
   in_array: in_array,

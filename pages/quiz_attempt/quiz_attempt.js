@@ -1,7 +1,6 @@
 // pages/quiz_attempt/quiz_attempt.js
 const app = getApp();
 const URL = app.globalData.url;
-
 Page({
   /**
    * 页面的初始数据
@@ -77,10 +76,7 @@ Page({
             if (res && res.header && res.header['Set-Cookie']) {
               wx.setStorageSync('cookieKey', res.header['Set-Cookie']);   //保存Cookie到Storage
             }
-            //result/view_result/ $rid
-            // wx.switchTab({
-            //   url: '../result/result_list',
-            // })
+
           },
           fail: res => {}
         })
@@ -201,11 +197,12 @@ Page({
   },
 
   setIndividual_time: function(cqn){
-    console.log('执行了setIndividual函数————————————————————————————')
-    console.log(`传进来的参数是：${cqn}`)
-    console.log(`当前题号qn：${this.data.qn}`)
-    console.log(`ctime：${this.data.ctime}`)
-    console.log(`(前)this.data.ind_time：${this.data.ind_time}`)
+    // console.log('执行了setIndividual函数————————————————————————————')
+    // console.log(`传进来的参数是：${cqn}`)
+    // console.log(`当前题号qn：${this.data.qn}`)
+    // console.log(`ctime：${this.data.ctime}`)
+    console.log(`(前)this.data.ind_time：`)
+    console.log(this.data.ind_time)
     let ind_time = this.data.ind_time //数组
     let qn = this.data.qn
     if (cqn == undefined || cqn == null) {
@@ -220,7 +217,8 @@ Page({
     }
     let quiz = this.data.quiz
     quiz.individual_time = ind_time.toString()
-    console.log(`(后)this.data.ind_time：${quiz.individual_time}`)
+    console.log(`(后)this.data.ind_time：`)
+    console.log(quiz.individual_time) //字符串
     this.setData({ ctime : 0, quiz : quiz, ind_time : ind_time },function(){
       //maybe can put this code outside
       let cookie = wx.getStorageSync('cookieKey')
@@ -238,7 +236,7 @@ Page({
           if (res && res.header && res.header['Set-Cookie']) {
             wx.setStorageSync('cookieKey', res.header['Set-Cookie']);   //保存Cookie到Storage
           }
-          console.log('setIndividual_time 执行成功-------------------------------------------')
+          // console.log('setIndividual_time 执行成功-------------------------------------------')
         },
         fail: res => {
           wx.showModal({
@@ -396,6 +394,7 @@ Page({
     this.setData({
       options_qid: options_qid
     })
+
     console.log('测试。。。my options:')
     console.log(options_qid)
   },
@@ -459,7 +458,7 @@ Page({
             console.log(result.data)
             let data = result.data
 
-            var ind_time = data.quiz.individual_time.split(',')
+            var ind_time = data.quiz.individual_time.split(',') //这里是数组
             for (var ct = 0; ct < data.quiz.noq; ct++) {
               if (!ind_time[ct]) {
                 ind_time[ct] = 0
@@ -467,6 +466,12 @@ Page({
                 ind_time[ct] = ind_time[ct]
               }
             }
+
+            //多数据循环
+            // for(let i=0; i<data.questions.length; i++){
+            //   WxParse.wxParse('que'+i,'html',data.questions[i].question,that)
+            // }
+            // WxParse.wxParseTemArray('parseQuestions','que',data.questions.length,that)
 
             that.setData({
               exam:data,
@@ -479,9 +484,9 @@ Page({
               ind_time: ind_time
             },function(){
               that.show_question('0') //
-              var incTime = setInterval(that.increasectime, 1000);
-              var setIndTime = setInterval(that.setIndividual_time, 30000);
-              var autoSubmit = setTimeout(that.submitform, data.seconds*1000);
+              var incTime = setInterval(that.increasectime, 1000);  //记录作答的时间 一秒一秒增加
+              var setIndTime = setInterval(that.setIndividual_time, 30000); //半分钟 提交一次答案
+              var autoSubmit = setTimeout(that.submitform, data.seconds*1000);  //自动交卷
               that.setData({ incTime: incTime, setIndTime: setIndTime, autoSubmit: autoSubmit })
 
               let seconds = data.seconds

@@ -1,4 +1,6 @@
 <!--pages/quiz_attempt/quiz_attempt.wxml-->
+<!-- // 引入模板 -->
+<!-- <import src="../../wxParse/wxParse.wxml"/> -->
 <view class='container'>
   <view class='header'>
     <text class='title'>{{quiz.quiz_name}}</text>
@@ -14,7 +16,9 @@
       <view id="q{{qk}}" class='{{ qk==qn ? "show_question" : "hidden_question" }}'>
           <view class='question_container'>
             <view><text>Question {{qk+1}})</text></view>
-            <text>{{question.question}}</text>
+            <!-- <text>{{question.question}}</text> -->
+            <!-- <template is="wxParse" data="{{wxParseData:parseQuestions[qk]}}"/> -->
+            <rich-text nodes='{{question.question}}'></rich-text>
           </view><!--end of question_container-->
 
           <view class='option_container'>
@@ -26,7 +30,8 @@
                 <view class='op' wx:for='{{options_qid[question.qid]}}' wx:for-index='ok' wx:for-item='option' wx:key='oid' >
                   <text>{{abc[ok]}} )</text>
                   <radio value='{{option.oid}}' checked='{{ tool.in_array( option.oid,saved_ans[question.qid] ) }}'>
-                  {{option.q_option}}
+                  <!-- {{option.q_option}} -->
+                  <rich-text nodes='{{option.q_option}}'></rich-text>
                   </radio>
                 </view>
               </radio-group>
@@ -37,7 +42,10 @@
               <checkbox-group name='answer[{{qk}}][]'>
                 <view class='op' wx:for='{{options_qid[question.qid]}}' wx:for-index='ok' wx:for-item='option' wx:key='oid' >
                   <text>{{abc[ok]}} )</text>
-                  <checkbox  value='{{option.oid}}' checked='{{tool.in_array(option.oid, saved_ans[question.qid] )}}'>{{option.q_option}}</checkbox>
+                  <checkbox  value='{{option.oid}}' checked='{{tool.in_array(option.oid, saved_ans[question.qid] )}}'>
+                  <!-- {{option.q_option}} -->
+                  <rich-text nodes='{{option.q_option}}'></rich-text>
+                  </checkbox>
                 </view>
               </checkbox-group>
             </view><!--end of 多选-->

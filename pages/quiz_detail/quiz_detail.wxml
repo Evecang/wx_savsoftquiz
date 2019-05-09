@@ -8,10 +8,10 @@
           <view class='detailKey'>Quiz Name</view>
           <view class='detailValue'>{{quizDetail.quiz_name}}</view>
       </view>
-      
+
       <view class='detailRow'>
           <view class='detailKey'>Description</view>
-          <view class='detailValue'>{{quizDetail.description}}</view>
+          <view class='detailValue'><rich-text nodes="{{quizDetail.description}}"></rich-text></view>
       </view>
       
       <view class='detailRow'>
