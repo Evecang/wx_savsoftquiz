@@ -35,6 +35,111 @@ Page({
     timeStr:'', //剩余时间 字符串形式 
 
   },
+  uploadImg:function(e){ //上传图片
+    const dataset = e.currentTarget.dataset;
+    let qk = dataset.qk
+    let rid = dataset.rid
+    let qid = dataset.qid
+    //name = answer + qk + file
+    wx.chooseImage({
+      count:1,
+      success(r){
+        // let key = 'answer'+qk+'file'
+        let cookie = wx.getStorageSync('cookieKey')
+        let header = { 'Content-type': 'application/x-www-form-urlencoded' }
+        if (cookie) {
+          header.Cookie = cookie;
+        }
+        wx.uploadFile({
+          url: URL + 'quiz/wx_upload_img',
+          filePath: r.tempFilePaths[0],
+          name: 'file',
+          formData:{
+            qk:qk,
+            rid:rid,
+            qid:qid
+          },
+          header:header,
+          success(res){
+            console.log(res)
+            if (res && res.header && res.header['Set-Cookie']) {
+              wx.setStorageSync('cookieKey', res.header['Set-Cookie']);   //保存Cookie到Storage
+            }
+            let data = JSON.parse(res.data)
+            console.log(data)
+            switch(data.code){
+              case 0:
+                wx.showModal({
+                  title: '提示',
+                  content: '上传失败，请检查文件是否为gif、jpeg、jpg、png格式的图片。',
+                  showCancel: false
+                })
+                break
+              case 1:
+                wx.showModal({
+                  title: '提示',
+                  content: '上传成功',
+                  showCancel:false
+                })
+            }
+          },
+          fail(res){
+            wx.showModal({
+              title: '错误',
+              content: '请求失败，请查看网络',
+            })
+          }
+        })
+      }
+    })
+  },
+  viewImg:function(e){  //查看已经上传的图片
+    const dataset = e.currentTarget.dataset;
+    let rid = dataset.rid
+    let qid = dataset.qid
+    let cookie = wx.getStorageSync('cookieKey')
+    let header = { 'Content-type': 'application/x-www-form-urlencoded' }
+    if (cookie) {
+      header.Cookie = cookie;
+    }
+    wx.request({
+      url: URL + 'quiz/view_uploaded_img',
+      method:'POST',
+      header:header,
+      data:{
+        rid:rid,
+        qid:qid
+      },
+      success(res){
+        console.log(res)
+        if (res && res.header && res.header['Set-Cookie']) {
+          wx.setStorageSync('cookieKey', res.header['Set-Cookie']);   //保存Cookie到Storage
+        }
+
+        //res.data
+        if(res.data!=''){
+          let urls = []
+          let base_url = app.globalData.userData.base_url
+          urls[0] = base_url + res.data.substr(2)
+          console.log(urls)
+          wx.previewImage({
+            urls: urls,
+          })
+        }else{
+          wx.showToast({
+            title: '该题并没有上传图片',
+            icon:'none',
+          })
+        }
+      },
+      fail(res){
+        wx.showModal({
+          title: '错误',
+          content: '请求失败，请查看网络',
+        })
+      }
+    })
+  },
   leadingZero:function(time) {
     return(time < 10) ?"0" + time : + time;
   },
@@ -156,6 +261,7 @@ Page({
     let form = e.detail.value
     console.log('form表单的数据--------------------------------')
     console.log(form)
+    
     wx.request({
       url: URL + 'quiz/wx_save_answer',
       method: 'POST',

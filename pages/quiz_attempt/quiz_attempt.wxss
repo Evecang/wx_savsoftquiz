@@ -27,9 +27,6 @@
   font-size: 16px;
   font-weight: 900;
 }
-.timer{
-  /* background-color: #000; */
-}
 
 .question_form{
   width: 100%;
@@ -75,17 +72,27 @@
   /* height: 90%; */
 }
 
+.longAnswerBtnBox{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10rpx;
+}
+
+.longAnswerBtn{
+  font-size: 32rpx;
+  width: 250rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  border: 1rpx solid #4cae4c;
+  background-color: #fff;
+}
+
 .picker{
   display: inline;
   border: 1rpx solid #000;
   position: relative;
 }
-/* .picker::after{
-  position: absolute;
-  right: 6rpx;
-  top: 5rpx;
-  contain: ''
-} */
 
 .match_select{
   display: grid;

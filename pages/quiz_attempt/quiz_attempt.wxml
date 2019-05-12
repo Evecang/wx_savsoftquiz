@@ -61,6 +61,10 @@
             <view wx:elif='{{question.question_type=="Long Answer"}}'>
               <input  name="question_type[{{qk}}]" id="q_type{{qk}}" value="4" style='display:none'/>
               <view>Answer</view>
+              <view class='longAnswerBtnBox'>
+                <button data-qk='{{qk}}' data-rid='{{rid}}' data-qid='{{question.qid}}'  bindtap='uploadImg' class='longAnswerBtn'>上传图片</button>
+                <button data-rid='{{rid}}' data-qid='{{question.qid}}'  bindtap='viewImg' class='longAnswerBtn' >查看已上传</button>
+              </view>
               <view style='display:flex;justify-content: space-evenly;'>
                 <textarea class='longInput' name='answer[{{qk}}][]' value='{{saved_ans[question.qid]}}' maxlength='-1' />
               </view>
