@@ -63,10 +63,6 @@
             <button data-qid="{{question['qid']}}" bindtap='viewImg' class='viewImgBtn'>View the uploaded picture.</button>
             <text>Your Answer: </text>
             <text>{{saved_ans[question['qid']]}}</text>
-
-            <!-- TODO:提交图片的情况，在这里显示用户答案 saved_ans[question['qid']] -->
-            <image wx:if="{{false}}" src="{{}}"></image>
-
           </view>
 
           <view>
