@@ -49,6 +49,15 @@
   margin:10rpx;
 }
 
+.viewImgBtn{
+  font-size: 32rpx;
+  /* width: 250rpx; */
+  height: 60rpx;
+  line-height: 60rpx;
+  border: 1rpx solid #4cae4c;
+  background-color: #fff;
+}
+
 .matchColumnGrid{
   display: grid;
   grid-template-columns: 15% 20% auto auto;

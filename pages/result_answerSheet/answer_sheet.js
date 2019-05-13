@@ -21,6 +21,32 @@ Page({
 
   },
 
+  viewImg: function (e) {  //查看已经上传的图片
+    const dataset = e.currentTarget.dataset;
+    let qid = dataset.qid
+    let result = this.data.result
+    let saved_answers = result.saved_answers
+    let src = ''
+    for(let i=0; i<saved_answers.length; i++){
+      if (saved_answers[i].qid == qid) {
+        src = saved_answers[i].img_src
+        break;
+      }
+    }
+    if(src==''||src==null){
+      wx.showToast({
+        title: '该题没有上传图片',
+        icon:'none'
+      })
+    }else{
+      let urls = []
+      let base_url = app.globalData.userData.base_url
+      urls[0] = base_url + src.substr(2)
+      wx.previewImage({
+        urls: urls,
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */

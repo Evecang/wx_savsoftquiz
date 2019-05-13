@@ -60,27 +60,30 @@
         <block wx:elif="{{question['question_type']=='Long Answer'}}">
 
           <view>
+            <button data-qid="{{question['qid']}}" bindtap='viewImg' class='viewImgBtn'>View the uploaded picture.</button>
             <text>Your Answer: </text>
             <text>{{saved_ans[question['qid']]}}</text>
 
-            <!-- TODO:提交图片的情况，在这里显示用户答案 saced_ans[question['qid']] -->
+            <!-- TODO:提交图片的情况，在这里显示用户答案 saved_ans[question['qid']] -->
             <image wx:if="{{false}}" src="{{}}"></image>
 
           </view>
 
           <view>
-            <text>Suggest Answer: </text>
-            <!-- 如果是 pending 状态就显示 pending ,  有 analyses 字段就给参考答案，否则显示没有参考答案 -->
+            <!-- 如果是 pending 状态就显示 pending ,  有q_option 字段就给参考答案，否则显示没有参考答案 -->
             <block wx:if="{{ind_score[qk] == 3}}">
               <text>Pending...</text>
             </block>
-            <block wx:elif="{{!!question['analyses']}}">
-              <text>{{question['analyses']}}</text>
-
-              <!-- TODO：答案是图片的情况，在这里修改图片路劲 question.ansImageSrc -->
-              <image wx:if="{{false}}" src="{{}}"></image>
-
+            <block wx:else>
+              <text>Suggest Answer:
+              <!-- {{ options_qid[question.qid][0].q_option }} -->
+              </text>
+               <rich-text nodes="{{options_qid[question.qid][0].q_option}}"></rich-text>
             </block>
+
+            <!-- TODO：答案是图片的情况，在这里修改图片路劲 question.ansImageSrc -->
+            <image wx:if="{{false}}" src="{{}}"></image>
+
           </view>
 
         </block><!-- 长简答题 , 这里有TODO！ -->
